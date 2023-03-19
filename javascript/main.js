@@ -36,6 +36,29 @@ function get_sibling_checkbox_status(node) {
   return false;
 }
 
+function change_bg(header, is_active) {
+  if (is_active) {
+    header.style.backgroundColor = color_enable;
+  } else {
+    header.style.backgroundColor = color_disable;
+  }
+}
+
+function operate_controlnet_component(controlnet_parts) {
+  let found_active_tab = false;
+  const divs = controlnet_parts.querySelectorAll(":scope>div>div>div");
+  const tabs = divs[0].querySelectorAll(":scope>button");
+  console.log("@@", divs, tabs);
+  for (let k = 1; k < divs.length; k++) {
+    const enable_span = get_enable_span(divs[k]);
+    const is_active = get_sibling_checkbox_status(enable_span);
+    console.log(k, is_active, enable_span, divs, tabs[k - 1]);
+    change_bg(tabs[k - 1], is_active);
+    found_active_tab = found_active_tab || is_active;
+  }
+  return found_active_tab;
+}
+
 function operate_component(component) {
   const enable_span = get_enable_span(component);
   if (!enable_span) {
@@ -43,11 +66,14 @@ function operate_component(component) {
   }
 
   const header = component.querySelectorAll("span.transition")[0].parentNode;
-  if (get_sibling_checkbox_status(enable_span)) {
-    header.style.backgroundColor = color_enable;
+  const controlnet_parts = component.querySelector("#controlnet");
+  let is_active = false;
+  if (controlnet_parts) {
+    is_active = operate_controlnet_component(controlnet_parts);
   } else {
-    header.style.backgroundColor = color_disable;
+    is_active = get_sibling_checkbox_status(enable_span);
   }
+  change_bg(header, is_active);
 }
 
 function main() {
