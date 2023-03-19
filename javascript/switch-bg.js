@@ -16,7 +16,10 @@ function get_enable_span(component) {
   const spans = component.querySelectorAll("span");
   for (let k = 0; k < spans.length; k++) {
     const span = spans[k];
-    if (span.innerText === "Enable") {
+    if (
+      span.innerText.toLowerCase().startsWith("enable") ||
+      span.innerText.toLowerCase().endsWith("enabled")
+    ) {
       return span;
     }
   }
