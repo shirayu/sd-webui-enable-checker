@@ -36,6 +36,20 @@ function get_sibling_checkbox_status(node) {
   return false;
 }
 
+function operate_component(component) {
+  const enable_span = get_enable_span(component);
+  if (!enable_span) {
+    return;
+  }
+
+  const header = component.querySelectorAll("span.transition")[0].parentNode;
+  if (get_sibling_checkbox_status(enable_span)) {
+    header.style.backgroundColor = color_enable;
+  } else {
+    header.style.backgroundColor = color_disable;
+  }
+}
+
 function main() {
   const area = get_script_area();
   if (!area) {
@@ -45,17 +59,7 @@ function main() {
   const components = area.querySelectorAll(":scope>div");
   for (let j = 0; j < components.length; j++) {
     const component = components[j];
-    const enable_span = get_enable_span(component);
-    if (!enable_span) {
-      continue;
-    }
-
-    const header = component.querySelectorAll("span.transition")[0].parentNode;
-    if (get_sibling_checkbox_status(enable_span)) {
-      header.style.backgroundColor = color_enable;
-    } else {
-      header.style.backgroundColor = color_disable;
-    }
+    operate_component(component);
   }
 }
 
