@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/shirayu/sd-webui-enable-checker/issues"
   },
-  "homepage": "https://github.com/shirayu/sd-webui-enable-checker#readme",
+  "homepage": "https://github.com/shirayu/sd-webui-enable-checker",
   "dependencies": {
   },
   "devDependencies": {
