@@ -48,11 +48,9 @@ function operate_controlnet_component(controlnet_parts) {
   let found_active_tab = false;
   const divs = controlnet_parts.querySelectorAll(":scope>div>div>div");
   const tabs = divs[0].querySelectorAll(":scope>button");
-  console.log("@@", divs, tabs);
   for (let k = 1; k < divs.length; k++) {
     const enable_span = get_enable_span(divs[k]);
     const is_active = get_sibling_checkbox_status(enable_span);
-    console.log(k, is_active, enable_span, divs, tabs[k - 1]);
     change_bg(tabs[k - 1], is_active);
     found_active_tab = found_active_tab || is_active;
   }
