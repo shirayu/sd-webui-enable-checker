@@ -1,5 +1,10 @@
-const color_enable = "skyblue";
-const color_disable = "grey";
+let color_enable = "skyblue";
+let color_disable = "#aeaeae"; // light grey
+if (window.location.href.indexOf("?__theme=dark") > 0) {
+  // for dark mode
+  color_enable = "#237366";
+  color_disable = "#5a5757";
+}
 
 function get_script_area() {
   for (const name of ["img2img", "txt2img"]) {
