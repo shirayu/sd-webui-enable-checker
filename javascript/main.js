@@ -1,9 +1,29 @@
-let color_enable = "skyblue";
-let color_disable = "#aeaeae"; // light grey
-if (window.location.href.indexOf("?__theme=dark") > 0) {
-  // for dark mode
-  color_enable = "#237366";
-  color_disable = "#5a5757";
+function isDarkColor(color) {
+  if (color.length == 0) {
+    return false;
+  }
+  let r, g, b;
+
+  if (color.startsWith("#")) {
+    [r, g, b] = color
+      .substring(1)
+      .match(/.{2}/g)
+      .map((c) => Number(`0x${c}`));
+  } else if (color.startsWith("rgb")) {
+    [r, g, b] = color.match(/\d+/g).map(Number);
+  } else {
+    const tempElem = document.createElement("div");
+    tempElem.style.color = color;
+    document.body.appendChild(tempElem);
+    [r, g, b] = window
+      .getComputedStyle(tempElem)
+      .color.match(/\d+/g)
+      .map(Number);
+    document.body.removeChild(tempElem);
+  }
+
+  const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+  return brightness < 128;
 }
 
 function get_script_area() {
@@ -41,7 +61,25 @@ function get_sibling_checkbox_status(node) {
   return false;
 }
 
+let color_enable = null;
+let color_disable = null;
+
+function set_color() {
+  if (color_enable !== null) {
+    return;
+  }
+  if (isDarkColor(document.body.style.backgroundColor)) {
+    color_enable = "#237366";
+    color_disable = "#5a5757";
+  } else {
+    color_enable = "skyblue";
+    color_disable = "#aeaeae"; // light grey
+  }
+}
+
 function change_bg(header, is_active) {
+  set_color();
+
   if (is_active) {
     header.style.backgroundColor = color_enable;
   } else {
