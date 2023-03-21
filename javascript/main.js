@@ -43,7 +43,8 @@ function get_enable_span(component) {
     const span = spans[k];
     if (
       span.innerText.toLowerCase().startsWith("enable") ||
-      span.innerText.toLowerCase().endsWith("enabled")
+      span.innerText.toLowerCase().endsWith("enabled") ||
+      span.innerText.toLowerCase() == "active"
     ) {
       return span;
     }
