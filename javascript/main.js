@@ -70,7 +70,10 @@ enableCheckerInit = function () {
     if (color_enable !== null) {
       return;
     }
-    if (isDarkColor(document.body.style.backgroundColor)) {
+    if (opts?.enable_checker_custom_color) {
+      color_enable = opts.enable_checker_custom_color_enable;
+      color_disable = opts.enable_checker_custom_color_disable;
+    } else if (isDarkColor(document.body.style.backgroundColor)) {
       color_enable = "#237366";
       color_disable = "#5a5757";
     } else {
