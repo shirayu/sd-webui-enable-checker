@@ -134,4 +134,7 @@ function main() {
 gradioApp().addEventListener("click", function (ev) {
   main();
 });
-setTimeout(main, 500);
+
+onUiUpdate(function () {
+  main()
+});
