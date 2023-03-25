@@ -118,7 +118,7 @@ function operate_component(component) {
   change_bg(header, is_active);
 }
 
-function main() {
+function main_enable_checker() {
   const area = get_script_area();
   if (!area) {
     return;
@@ -132,9 +132,9 @@ function main() {
 }
 
 gradioApp().addEventListener("click", function (ev) {
-  main();
+  main_enable_checker();
 });
 
 onUiUpdate(function () {
-  main()
+  main_enable_checker()
 });
