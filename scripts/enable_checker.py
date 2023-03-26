@@ -1,7 +1,7 @@
-from modules import script_callbacks, shared
+from modules import script_callbacks, shared  # pyright: ignore
 
 try:
-    from modules import ui_components
+    from modules import ui_components  # pyright: ignore
 
     FormColorPicker = ui_components.FormColorPicker
 except (ImportError, AttributeError):
