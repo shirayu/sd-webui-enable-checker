@@ -111,7 +111,7 @@ enableCheckerInit = function () {
       return;
     }
 
-    const header = component.querySelectorAll("span.transition")[0].parentNode;
+    const header = component.querySelector("div.label-wrap");
     const controlnet_parts = component.querySelector("#controlnet");
     let is_active = false;
     if (controlnet_parts) {
@@ -120,6 +120,40 @@ enableCheckerInit = function () {
       is_active = get_sibling_checkbox_status(enable_span);
     }
     change_bg(header, is_active);
+  }
+
+  const visited = new Set();
+  function operate_component_for_first_visit(component) {
+    visited.add(component.id);
+    // To check initial status
+    let icon = component.querySelector("span.icon");
+    if (icon) {
+      icon.click(); //Open
+    }
+
+    const targetSelector = "div.gap";
+    const observerConfig = { childList: true, subtree: true };
+
+    const observer = new MutationObserver((mutationsList, observer) => {
+      for (const mutation of mutationsList) {
+        if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
+          for (const node of mutation.addedNodes) {
+            if (node.matches && node.matches(targetSelector)) {
+              operate_component(component);
+
+              if (icon) {
+                icon.click(); // Close
+              }
+
+              observer.disconnect();
+            }
+          }
+        }
+      }
+    });
+
+    const targetNode = document.body;
+    observer.observe(targetNode, observerConfig);
   }
 
   function main_enable_checker() {
@@ -131,7 +165,12 @@ enableCheckerInit = function () {
     const components = area.querySelectorAll(":scope>div");
     for (let j = 0; j < components.length; j++) {
       const component = components[j];
-      operate_component(component);
+
+      if (visited.has(component.id)) {
+        operate_component(component);
+      } else {
+        operate_component_for_first_visit(component);
+      }
     }
   }
 
