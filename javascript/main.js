@@ -109,7 +109,22 @@ enableCheckerInit = function () {
     return component.querySelector("div.label-wrap");
   }
 
+  function operate_dropdown(component) {
+    set_color();
+    const inners = component.querySelectorAll(".wrap-inner");
+    for (let k = 0; k < inners.length; k++) {
+      const inner = inners[k];
+      const ddom = inner.querySelector(".wrap-inner span.single-select");
+      if (ddom.innerText.toLowerCase() == "none") {
+        inner.style.backgroundColor = color_disable;
+      } else {
+        inner.style.backgroundColor = "";
+      }
+    }
+  }
+
   function operate_component(component) {
+    operate_dropdown(component);
     const enable_span = get_enable_span(component);
     if (!enable_span) {
       return;
