@@ -4,7 +4,7 @@
   "description": "A simple extension for Automatic1111/stable-diffusion-webui",
   "main": "index.js",
   "scripts": {
-    "test:eslint": "find javascript/ -type f -name  | xargs eslint",
+    "test:eslint": "find javascript/ -type f -name '*.js' | xargs eslint",
     "test:md": "npx markdownlint *.md",
     "test": "run-s test:eslint test:md"
   },
