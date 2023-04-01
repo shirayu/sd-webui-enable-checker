@@ -11,6 +11,12 @@ except (ImportError, AttributeError):
 
 def on_ui_settings():
     section = ("enable_checker", "Enable Checker")
+
+    shared.opts.add_option(
+        "enable_checker_activate_dropdown_check",
+        shared.OptionInfo(True, "Enable dropdown check", section=section),
+    )
+
     shared.opts.add_option(
         "enable_checker_custom_color",
         shared.OptionInfo(False, "Use custom colors", section=section),
@@ -29,6 +35,24 @@ def on_ui_settings():
         shared.OptionInfo(
             "#aeaeae",
             "Custom color of disabled scripts",
+            FormColorPicker,
+            section=section,
+        ),
+    )
+    shared.opts.add_option(
+        "enable_checker_custom_color_dropdown_enable",
+        shared.OptionInfo(
+            "#a0d8ef",
+            "Custom color of enabled dropdown",
+            FormColorPicker,
+            section=section,
+        ),
+    )
+    shared.opts.add_option(
+        "enable_checker_custom_color_dropdown_disable",
+        shared.OptionInfo(
+            "#aeaeae",
+            "Custom color of disabled dropdown",
             FormColorPicker,
             section=section,
         ),
