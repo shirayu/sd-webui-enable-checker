@@ -27,6 +27,33 @@ enableCheckerInit = function () {
     return brightness < 128;
   }
 
+  class Setting {
+    constructor() {
+      this.enable_checker_activate_dropdown_check =
+        opts.enable_checker_activate_dropdown_check;
+      if (opts?.enable_checker_custom_color) {
+        this.color_enable = opts.enable_checker_custom_color_enable;
+        this.color_disable = opts.enable_checker_custom_color_disable;
+        this.color_dropdown_enable =
+          opts.enable_checker_custom_color_dropdown_enable;
+        this.color_dropdown_disable =
+          opts.enable_checker_custom_color_dropdown_disable;
+      } else {
+        if (isDarkColor(document.body.style.backgroundColor)) {
+          this.color_enable = "#237366";
+          this.color_disable = "#5a5757";
+          this.color_dropdown_enable = "#233873";
+        } else {
+          this.color_enable = "skyblue";
+          this.color_disable = "#aeaeae"; // light grey
+          this.color_dropdown_enable = "#a4f8f1"; // light green
+        }
+        this.color_dropdown_disable = this.color_disable;
+      }
+    }
+  }
+  let setting = null;
+
   function get_script_area() {
     for (const name of ["img2img", "txt2img"]) {
       const tab = gradioApp().getElementById(`tab_${name}`);
@@ -63,32 +90,11 @@ enableCheckerInit = function () {
     return false;
   }
 
-  let color_enable = null;
-  let color_disable = null;
-
-  function set_color() {
-    if (color_enable !== null) {
-      return;
-    }
-    if (opts?.enable_checker_custom_color) {
-      color_enable = opts.enable_checker_custom_color_enable;
-      color_disable = opts.enable_checker_custom_color_disable;
-    } else if (isDarkColor(document.body.style.backgroundColor)) {
-      color_enable = "#237366";
-      color_disable = "#5a5757";
-    } else {
-      color_enable = "skyblue";
-      color_disable = "#aeaeae"; // light grey
-    }
-  }
-
   function change_bg(header, is_active) {
-    set_color();
-
     if (is_active) {
-      header.style.backgroundColor = color_enable;
+      header.style.backgroundColor = setting.color_enable;
     } else {
-      header.style.backgroundColor = color_disable;
+      header.style.backgroundColor = setting.color_disable;
     }
   }
 
@@ -109,7 +115,27 @@ enableCheckerInit = function () {
     return component.querySelector("div.label-wrap");
   }
 
+  function operate_dropdown(component) {
+    if (!setting.enable_checker_activate_dropdown_check) {
+      return;
+    }
+    const inners = component.querySelectorAll(".wrap-inner");
+    for (let k = 0; k < inners.length; k++) {
+      const inner = inners[k];
+      const ddom = inner.querySelector(".wrap-inner span.single-select");
+      if (
+        ddom.innerText.toLowerCase() == "none" ||
+        ddom.innerText.toLowerCase() == "nothing"
+      ) {
+        inner.style.backgroundColor = setting.color_dropdown_disable;
+      } else {
+        inner.style.backgroundColor = setting.color_dropdown_enable;
+      }
+    }
+  }
+
   function operate_component(component) {
+    operate_dropdown(component);
     const enable_span = get_enable_span(component);
     if (!enable_span) {
       return;
@@ -169,6 +195,10 @@ enableCheckerInit = function () {
     const area = get_script_area();
     if (!area) {
       return;
+    }
+
+    if (!setting) {
+      setting = new Setting();
     }
 
     const components = area.querySelectorAll(":scope>div");
