@@ -61,6 +61,15 @@ def on_ui_settings():
             section=section,
         ),
     )
+    shared.opts.add_option(
+        "enable_checker_custom_color_zero_weihgt",
+        shared.OptionInfo(
+            "#aeaeae",
+            "Custom color of 0 weight",
+            FormColorPicker,
+            section=section,
+        ),
+    )
 
 
 script_callbacks.on_ui_settings(on_ui_settings)

@@ -40,6 +40,8 @@ enableCheckerInit = function () {
           opts.enable_checker_custom_color_dropdown_enable;
         this.color_dropdown_disable =
           opts.enable_checker_custom_color_dropdown_disable;
+        this.custom_color_zero_weihgt =
+          opts.enable_checker_custom_color_zero_weihgt;
       } else {
         if (isDarkColor(document.body.style.backgroundColor)) {
           this.color_enable = "#237366";
@@ -51,6 +53,7 @@ enableCheckerInit = function () {
           this.color_dropdown_enable = "#a4f8f1"; // light green
         }
         this.color_dropdown_disable = this.color_disable;
+        this.custom_color_zero_weihgt = this.color_disable;
       }
     }
   }
@@ -133,7 +136,7 @@ enableCheckerInit = function () {
         continue;
       }
       if (input.value == 0) {
-        input.style.backgroundColor = setting.color_dropdown_disable;
+        input.style.backgroundColor = setting.custom_color_zero_weihgt;
       } else {
         input.style.backgroundColor = "";
       }
