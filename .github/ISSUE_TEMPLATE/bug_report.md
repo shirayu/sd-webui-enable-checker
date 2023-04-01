@@ -21,6 +21,7 @@ assignees: ''
 ## Environment
 
 - OS:
+- Browser Version:
 - stable-diffusion-webui Version:
 - sd-webui-enable-checker Version:
 
