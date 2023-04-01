@@ -162,33 +162,30 @@ enableCheckerInit = function () {
     visited.add(component.id);
     // To check initial status, open the panel
     const icon = component.querySelector("span.icon");
+    let panel_opened = false;
     if (icon && !is_panel_open()) {
       icon.click(); //Open
+      panel_opened = true;
     }
-
-    const targetSelector = "div.gap";
-    const observerConfig = { childList: true, subtree: true };
 
     const observer = new MutationObserver((mutationsList, observer) => {
       for (const mutation of mutationsList) {
-        if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
-          for (const node of mutation.addedNodes) {
-            if (node.matches && node.matches(targetSelector)) {
-              operate_component(component);
+        if (mutation.type === "childList") {
+          operate_component(component);
 
-              if (icon && is_panel_open()) {
-                icon.click(); // Close
-              }
-
-              observer.disconnect();
+          if (panel_opened) {
+            if (icon && is_panel_open()) {
+              icon.click(); // Close
+              panel_opened = false;
+            } else {
+              continue; // need to close but not closed
             }
           }
+          observer.disconnect();
         }
       }
     });
-
-    const targetNode = document.body;
-    observer.observe(targetNode, observerConfig);
+    observer.observe(component, { childList: true, subtree: true });
   }
 
   function main_enable_checker() {
