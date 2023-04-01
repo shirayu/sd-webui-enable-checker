@@ -16,6 +16,10 @@ def on_ui_settings():
         "enable_checker_activate_dropdown_check",
         shared.OptionInfo(True, "Enable dropdown check", section=section),
     )
+    shared.opts.add_option(
+        "enable_checker_activate_weight_check",
+        shared.OptionInfo(True, "Enable weight check", section=section),
+    )
 
     shared.opts.add_option(
         "enable_checker_custom_color",

@@ -31,6 +31,8 @@ enableCheckerInit = function () {
     constructor() {
       this.enable_checker_activate_dropdown_check =
         opts.enable_checker_activate_dropdown_check;
+      this.enable_checker_activate_weight_check =
+        opts.enable_checker_activate_weight_check;
       if (opts?.enable_checker_custom_color) {
         this.color_enable = opts.enable_checker_custom_color_enable;
         this.color_disable = opts.enable_checker_custom_color_disable;
@@ -115,6 +117,29 @@ enableCheckerInit = function () {
     return component.querySelector("div.label-wrap");
   }
 
+  function operate_value_input(component) {
+    if (!setting.enable_checker_activate_weight_check) {
+      return;
+    }
+    const labels = component.querySelectorAll("label");
+    for (let k = 0; k < labels.length; k++) {
+      const labeldom = labels[k];
+      const label_text = labeldom.querySelector("span")?.innerText;
+      if (!label_text || !label_text.toLowerCase().includes("weight")) {
+        continue;
+      }
+      const input = labeldom.parentNode.querySelector("input");
+      if (!input) {
+        continue;
+      }
+      if (input.value == 0) {
+        input.style.backgroundColor = setting.color_dropdown_disable;
+      } else {
+        input.style.backgroundColor = "";
+      }
+    }
+  }
+
   function operate_dropdown(component) {
     if (!setting.enable_checker_activate_dropdown_check) {
       return;
@@ -136,6 +161,7 @@ enableCheckerInit = function () {
 
   function operate_component(component) {
     operate_dropdown(component);
+    operate_value_input(component);
     const enable_span = get_enable_span(component);
     if (!enable_span) {
       return;
