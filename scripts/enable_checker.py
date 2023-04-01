@@ -42,7 +42,7 @@ def on_ui_settings():
     shared.opts.add_option(
         "enable_checker_custom_color_dropdown_enable",
         shared.OptionInfo(
-            "#a0d8ef",
+            "#233873",
             "Custom color of enabled dropdown",
             FormColorPicker,
             section=section,

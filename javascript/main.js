@@ -42,11 +42,12 @@ enableCheckerInit = function () {
         if (isDarkColor(document.body.style.backgroundColor)) {
           this.color_enable = "#237366";
           this.color_disable = "#5a5757";
+          this.color_dropdown_enable = "#233873";
         } else {
           this.color_enable = "skyblue";
           this.color_disable = "#aeaeae"; // light grey
+          this.color_dropdown_enable = "#a4f8f1"; // light green
         }
-        this.color_dropdown_enable = this.color_enable;
         this.color_dropdown_disable = this.color_disable;
       }
     }
@@ -126,11 +127,9 @@ enableCheckerInit = function () {
         ddom.innerText.toLowerCase() == "none" ||
         ddom.innerText.toLowerCase() == "nothing"
       ) {
-        inner.style.backgroundColor =
-          setting.color_dropdown_disable;
+        inner.style.backgroundColor = setting.color_dropdown_disable;
       } else {
-        inner.style.backgroundColor =
-          setting.color_dropdown_enable;
+        inner.style.backgroundColor = setting.color_dropdown_enable;
       }
     }
   }
