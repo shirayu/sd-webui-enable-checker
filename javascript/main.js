@@ -105,13 +105,17 @@ enableCheckerInit = function () {
     return found_active_tab;
   }
 
+  function get_component_header(component) {
+    return component.querySelector("div.label-wrap");
+  }
+
   function operate_component(component) {
     const enable_span = get_enable_span(component);
     if (!enable_span) {
       return;
     }
 
-    const header = component.querySelector("div.label-wrap");
+    const header = get_component_header(component);
     const controlnet_parts = component.querySelector("#controlnet");
     let is_active = false;
     if (controlnet_parts) {
@@ -124,10 +128,15 @@ enableCheckerInit = function () {
 
   const visited = new Set();
   function operate_component_for_first_visit(component) {
+    const header = get_component_header(component);
+    function is_panel_open() {
+      return header.classList.contains("open");
+    }
+
     visited.add(component.id);
-    // To check initial status
-    let icon = component.querySelector("span.icon");
-    if (icon) {
+    // To check initial status, open the panel
+    const icon = component.querySelector("span.icon");
+    if (icon && !is_panel_open()) {
       icon.click(); //Open
     }
 
@@ -141,7 +150,7 @@ enableCheckerInit = function () {
             if (node.matches && node.matches(targetSelector)) {
               operate_component(component);
 
-              if (icon) {
+              if (icon && is_panel_open()) {
                 icon.click(); // Close
               }
 
