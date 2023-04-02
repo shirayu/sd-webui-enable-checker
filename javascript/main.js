@@ -72,7 +72,7 @@ enableCheckerInit = function () {
       }
     }
 
-    getComponet(id) {
+    getComponent(id) {
       if (id.startsWith("component-")) {
         id = Number(id.replace(/^component-/, ""));
       }
@@ -181,7 +181,7 @@ enableCheckerInit = function () {
       return true;
     }
 
-    const info = setting.getComponet(root.id);
+    const info = setting.getComponent(root.id);
 
     if (info?.props?.choices) {
       if (info.props.choices.length <= 1) {
