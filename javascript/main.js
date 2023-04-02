@@ -55,6 +55,31 @@ enableCheckerInit = function () {
         this.color_dropdown_disable = this.color_disable;
         this.custom_color_zero_weihgt = this.color_disable;
       }
+
+      this.componentId2componentIndex = {};
+      for (
+        let index = 0;
+        index < window.gradio_config.components.length;
+        index++
+      ) {
+        this.componentId2componentIndex[
+          window.gradio_config.components[index].id
+        ] = index;
+        const elem_id = window.gradio_config.components[index]?.props?.elem_id;
+        if (elem_id) {
+          this.componentId2componentIndex[elem_id] = index;
+        }
+      }
+    }
+
+    getComponet(id) {
+      if (id.startsWith("component-")) {
+        id = Number(id.replace(/^component-/, ""));
+      }
+
+      return window.gradio_config.components[
+        this.componentId2componentIndex[id]
+      ];
     }
   }
   let setting = null;
@@ -143,18 +168,48 @@ enableCheckerInit = function () {
     }
   }
 
+  function is_none(str) {
+    return str.toLowerCase() === "none" || str.toLowerCase() === "nothing";
+  }
+
+  function is_target_dropwodn(component) {
+    let root = component;
+    while (root && !root.id) {
+      root = root.parentNode;
+    }
+    if (!root) {
+      return true;
+    }
+
+    const info = setting.getComponet(root.id);
+
+    if (info?.props?.choices) {
+      if (info.props.choices.length <= 1) {
+        return false;
+      }
+      const hasNoneOrNothing = info.props.choices.some((str) => {
+        return is_none(str);
+      });
+
+      return hasNoneOrNothing;
+    }
+    return true;
+  }
+
   function operate_dropdown(component) {
     if (!setting.enable_checker_activate_dropdown_check) {
       return;
     }
+
     const inners = component.querySelectorAll(".wrap-inner");
     for (let k = 0; k < inners.length; k++) {
       const inner = inners[k];
       const ddom = inner.querySelector(".wrap-inner span.single-select");
-      if (
-        ddom.innerText.toLowerCase() == "none" ||
-        ddom.innerText.toLowerCase() == "nothing"
-      ) {
+      if (!is_target_dropwodn(ddom)) {
+        continue;
+      }
+
+      if (is_none(ddom.innerText)) {
         inner.style.backgroundColor = setting.color_dropdown_disable;
       } else {
         inner.style.backgroundColor = setting.color_dropdown_enable;
