@@ -1,9 +1,17 @@
 
-# Switch background color by clicking "Enable" buttons
+# Checker of "enable" status
 
 A simple extension for [AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
 
-![Screenhot](https://user-images.githubusercontent.com/963961/229269865-d9d98685-1ec6-45c8-9113-f7a7e53f4a39.png)
+## Features
+
+### Switch background color by clicking "Enable" buttons
+
+![Screenhot of extension status](https://user-images.githubusercontent.com/963961/229269865-d9d98685-1ec6-45c8-9113-f7a7e53f4a39.png)
+
+### LoRA Check
+
+![Screenhot of LoRA check](https://user-images.githubusercontent.com/963961/230773384-660633b1-992a-45a6-afc7-2d899bb8b7d7.png)
 
 ## Preferences
 
