@@ -33,6 +33,11 @@ enableCheckerInit = function () {
         opts.enable_checker_activate_dropdown_check;
       this.enable_checker_activate_weight_check =
         opts.enable_checker_activate_weight_check;
+      this.enable_checker_activate_extra_network_check =
+        opts.enable_checker_activate_extra_network_check;
+
+      this.loras = null;
+
       if (opts?.enable_checker_custom_color) {
         this.color_enable = opts.enable_checker_custom_color_enable;
         this.color_disable = opts.enable_checker_custom_color_disable;
@@ -293,12 +298,64 @@ enableCheckerInit = function () {
       }
     }
   }
+  function init_network_checker(tabname, force) {
+    if (!setting?.enable_checker_activate_extra_network_check) {
+      return;
+    } else if (!force && setting.loras !== null) {
+      return;
+    }
 
-  return [main_enable_checker];
+    const name_doms = gradioApp()
+      .getElementById(`${tabname}_lora_cards`)
+      .querySelectorAll(".name");
+    setting.loras = [];
+    for (let j = 0; j < name_doms.length; j++) {
+      setting.loras.push(name_doms[j].innerText);
+    }
+  }
+
+  function main_network_checker(tabname) {
+    if (!setting?.enable_checker_activate_extra_network_check) {
+      return;
+    }
+
+    init_network_checker(tabname, false);
+
+    const prexs = [`${tabname}_prompt`, `${tabname}_neg_prompt`];
+
+    for (let j = 0; j < prexs.length; j++) {
+      const dom = gradioApp().querySelector(`#${prexs[j]} > label > textarea`);
+      const log_dom_id = `${prexs[j]}_error_log`;
+      let log_dom = gradioApp().getElementById(log_dom_id);
+      if (!log_dom) {
+        log_dom = document.createElement("div");
+        log_dom.id = log_dom_id;
+        dom.parentElement.parentElement.appendChild(log_dom);
+      }
+
+      const regex = /<lora:(.*?):[^>]+>/g;
+      const matches = dom.value.matchAll(regex);
+      const target_lora_names = Array.from(matches, (m) => m[1]);
+      const notIncluded = target_lora_names.filter(
+        (item) => !setting.loras.includes(item)
+      );
+
+      if (notIncluded.length == 0) {
+        dom.style.background = "";
+        log_dom.innerText = "";
+        continue;
+      }
+      dom.style.background = "#ed9797";
+      log_dom.innerText = `Not found LoRA: ` + notIncluded.join(", ");
+    }
+  }
+  return [main_enable_checker, init_network_checker, main_network_checker];
 };
 
 const init_enableChecker = enableCheckerInit();
 const main_enable_checker = init_enableChecker[0];
+const init_network_checker = init_enableChecker[1];
+const main_network_checker = init_enableChecker[2];
 
 gradioApp().addEventListener("click", function () {
   main_enable_checker();
@@ -306,4 +363,28 @@ gradioApp().addEventListener("click", function () {
 
 onUiUpdate(function () {
   main_enable_checker();
+});
+
+onUiLoaded(function () {
+  gradioApp()
+    .getElementById("txt2img_extra_refresh")
+    .addEventListener("click", () => {
+      init_network_checker("txt2img", true);
+    });
+  gradioApp()
+    .getElementById("img2img_extra_refresh")
+    .addEventListener("click", () => {
+      init_network_checker("txt2img", false);
+    });
+
+  gradioApp()
+    .getElementById("txt2img_generate")
+    .addEventListener("click", () => {
+      main_network_checker("txt2img", true);
+    });
+  gradioApp()
+    .getElementById("img2img_generate")
+    .addEventListener("click", () => {
+      main_network_checker("img2img", false);
+    });
 });
