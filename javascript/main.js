@@ -136,7 +136,13 @@ enableCheckerInit = function () {
   function operate_controlnet_component(controlnet_parts) {
     let found_active_tab = false;
     const divs = controlnet_parts.querySelectorAll(":scope>div>div>div");
+    if (divs == undefined || divs.length < 1) {
+      return null;
+    }
     const tabs = divs[0].querySelectorAll(":scope>button");
+    if (tabs.length == 0) {
+      return null;
+    }
     for (let k = 1; k < divs.length; k++) {
       const enable_span = get_enable_span(divs[k]);
       const is_active = get_sibling_checkbox_status(enable_span);
@@ -235,6 +241,11 @@ enableCheckerInit = function () {
     let is_active = false;
     if (controlnet_parts) {
       is_active = operate_controlnet_component(controlnet_parts);
+
+      //no tab (single ControlNet)
+      if (is_active === null) {
+        is_active = get_sibling_checkbox_status(enable_span);
+      }
     } else {
       is_active = get_sibling_checkbox_status(enable_span);
     }
