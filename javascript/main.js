@@ -293,7 +293,7 @@ enableCheckerInit = function () {
 
   function main_enable_checker() {
     const area = get_script_area();
-    if (!area) {
+    if (!area || opts === undefined) {
       return;
     }
 
@@ -328,48 +328,66 @@ enableCheckerInit = function () {
     }
   }
 
-  function main_network_checker(tabname) {
-    if (!setting?.enable_checker_activate_extra_network_check) {
+  function main_network_checker(prefix) {
+    const dom = gradioApp().querySelector(`#${prefix} > label > textarea`);
+    const log_dom_id = `${prefix}_error_log`;
+    let log_dom = gradioApp().getElementById(log_dom_id);
+    if (!log_dom) {
+      log_dom = document.createElement("div");
+      log_dom.id = log_dom_id;
+      dom.parentElement.parentElement.appendChild(log_dom);
+    }
+
+    const regex = /<lora:(.*?):[^>]+>/g;
+    const matches = dom.value.matchAll(regex);
+    const target_lora_names = Array.from(matches, (m) => m[1]);
+    const notIncluded = target_lora_names.filter(
+      (item) => !setting.loras.includes(item)
+    );
+
+    if (notIncluded.length == 0) {
+      dom.style.background = "";
+      log_dom.innerText = "";
       return;
     }
-
-    init_network_checker(tabname, false);
-
-    const prexs = [`${tabname}_prompt`, `${tabname}_neg_prompt`];
-
-    for (let j = 0; j < prexs.length; j++) {
-      const dom = gradioApp().querySelector(`#${prexs[j]} > label > textarea`);
-      const log_dom_id = `${prexs[j]}_error_log`;
-      let log_dom = gradioApp().getElementById(log_dom_id);
-      if (!log_dom) {
-        log_dom = document.createElement("div");
-        log_dom.id = log_dom_id;
-        dom.parentElement.parentElement.appendChild(log_dom);
-      }
-
-      const regex = /<lora:(.*?):[^>]+>/g;
-      const matches = dom.value.matchAll(regex);
-      const target_lora_names = Array.from(matches, (m) => m[1]);
-      const notIncluded = target_lora_names.filter(
-        (item) => !setting.loras.includes(item)
-      );
-
-      if (notIncluded.length == 0) {
-        dom.style.background = "";
-        log_dom.innerText = "";
-        continue;
-      }
-      dom.style.background = setting.color_invalid_additional_networks;
-      log_dom.innerText = `Not found LoRA: ` + notIncluded.join(", ");
-    }
+    dom.style.background = setting.color_invalid_additional_networks;
+    log_dom.innerText = `Not found LoRA: ` + notIncluded.join(", ");
   }
-  return [main_enable_checker, init_network_checker, main_network_checker];
+
+  function onui_enable_checker() {
+    ["txt2img", "img2img"].forEach((tabname) => {
+      gradioApp()
+        .getElementById(`${tabname}_extra_refresh`)
+        .addEventListener("click", () => {
+          init_network_checker(tabname, true);
+        });
+
+      ["prompt", "neg_prompt"].forEach((target_prompt) => {
+        const prefix = `${tabname}_${target_prompt}`;
+        const textarea = gradioApp().querySelector(
+          `#${prefix} > label > textarea`
+        );
+        textarea.addEventListener("input", () => {
+          init_network_checker(tabname, false);
+          main_network_checker(prefix);
+        });
+      });
+    });
+  }
+
+  return [
+    main_enable_checker,
+    init_network_checker,
+    main_network_checker,
+    onui_enable_checker,
+  ];
 };
 
 const init_enableChecker = enableCheckerInit();
 const main_enable_checker = init_enableChecker[0];
 const init_network_checker = init_enableChecker[1];
 const main_network_checker = init_enableChecker[2];
+const onui_enable_checker = init_enableChecker[3];
 
 gradioApp().addEventListener("click", function () {
   main_enable_checker();
@@ -380,25 +398,5 @@ onUiUpdate(function () {
 });
 
 onUiLoaded(function () {
-  gradioApp()
-    .getElementById("txt2img_extra_refresh")
-    .addEventListener("click", () => {
-      init_network_checker("txt2img", true);
-    });
-  gradioApp()
-    .getElementById("img2img_extra_refresh")
-    .addEventListener("click", () => {
-      init_network_checker("txt2img", true);
-    });
-
-  gradioApp()
-    .getElementById("txt2img_generate")
-    .addEventListener("click", () => {
-      main_network_checker("txt2img");
-    });
-  gradioApp()
-    .getElementById("img2img_generate")
-    .addEventListener("click", () => {
-      main_network_checker("img2img");
-    });
+  onui_enable_checker();
 });
