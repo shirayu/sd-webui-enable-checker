@@ -47,6 +47,8 @@ enableCheckerInit = function () {
           opts.enable_checker_custom_color_dropdown_disable;
         this.custom_color_zero_weihgt =
           opts.enable_checker_custom_color_zero_weihgt;
+        this.color_invalid_additional_networks =
+          opts.enable_checker_custom_color_invalid_additional_networks;
       } else {
         if (isDarkColor(document.body.style.backgroundColor)) {
           this.color_enable = "#237366";
@@ -59,6 +61,7 @@ enableCheckerInit = function () {
         }
         this.color_dropdown_disable = this.color_disable;
         this.custom_color_zero_weihgt = this.color_disable;
+        this.color_invalid_additional_networks = "#ed9797";
       }
 
       this.componentId2componentIndex = {};
@@ -356,7 +359,7 @@ enableCheckerInit = function () {
         log_dom.innerText = "";
         continue;
       }
-      dom.style.background = "#ed9797";
+      dom.style.background = setting.color_invalid_additional_networks;
       log_dom.innerText = `Not found LoRA: ` + notIncluded.join(", ");
     }
   }

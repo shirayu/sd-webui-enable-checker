@@ -74,6 +74,15 @@ def on_ui_settings():
             section=section,
         ),
     )
+    shared.opts.add_option(
+        "enable_checker_custom_color_invalid_additional_networks",
+        shared.OptionInfo(
+            "#ed9797",
+            "Custom color for invalid additional networks",
+            FormColorPicker,
+            section=section,
+        ),
+    )
 
 
 script_callbacks.on_ui_settings(on_ui_settings)
