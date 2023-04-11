@@ -329,6 +329,9 @@ enableCheckerInit = function () {
   }
 
   function main_network_checker(prefix) {
+    if (!setting?.enable_checker_activate_extra_network_check) {
+      return;
+    }
     const dom = gradioApp().querySelector(`#${prefix} > label > textarea`);
     const log_dom_id = `${prefix}_error_log`;
     let log_dom = gradioApp().getElementById(log_dom_id);
