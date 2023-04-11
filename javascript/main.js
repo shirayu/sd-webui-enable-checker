@@ -388,17 +388,17 @@ onUiLoaded(function () {
   gradioApp()
     .getElementById("img2img_extra_refresh")
     .addEventListener("click", () => {
-      init_network_checker("txt2img", false);
+      init_network_checker("txt2img", true);
     });
 
   gradioApp()
     .getElementById("txt2img_generate")
     .addEventListener("click", () => {
-      main_network_checker("txt2img", true);
+      main_network_checker("txt2img");
     });
   gradioApp()
     .getElementById("img2img_generate")
     .addEventListener("click", () => {
-      main_network_checker("img2img", false);
+      main_network_checker("img2img");
     });
 });
