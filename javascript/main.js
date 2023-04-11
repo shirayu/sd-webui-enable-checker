@@ -313,7 +313,10 @@ enableCheckerInit = function () {
     }
   }
   function init_network_checker(tabname, force) {
-    if (!setting?.enable_checker_activate_extra_network_check) {
+    if (
+      setting === null ||
+      !setting?.enable_checker_activate_extra_network_check
+    ) {
       return;
     } else if (!force && setting.loras !== null) {
       return;
@@ -329,7 +332,10 @@ enableCheckerInit = function () {
   }
 
   function main_network_checker(prefix) {
-    if (!setting?.enable_checker_activate_extra_network_check) {
+    if (
+      setting === null ||
+      !setting?.enable_checker_activate_extra_network_check
+    ) {
       return;
     }
     const dom = gradioApp().querySelector(`#${prefix} > label > textarea`);
