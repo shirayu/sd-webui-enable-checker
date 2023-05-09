@@ -215,15 +215,15 @@ enableCheckerInit = function () {
       return;
     }
 
-    const inners = component.querySelectorAll(".wrap-inner");
+    const inners = component.querySelectorAll('[class*=wrap-inner]');
     for (let k = 0; k < inners.length; k++) {
       const inner = inners[k];
-      const ddom = inner.querySelector(".wrap-inner span.single-select");
+      const ddom = inner.querySelector("input");
       if (!is_target_dropwodn(ddom)) {
         continue;
       }
 
-      if (is_none(ddom.innerText)) {
+      if (is_none(ddom.value)) {
         inner.style.backgroundColor = setting.color_dropdown_disable;
       } else {
         inner.style.backgroundColor = setting.color_dropdown_enable;
