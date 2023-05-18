@@ -215,7 +215,7 @@ enableCheckerInit = function () {
       return;
     }
 
-    const inners = component.querySelectorAll('[class*=wrap-inner]');
+    const inners = component.querySelectorAll("[class*=wrap-inner]");
     for (let k = 0; k < inners.length; k++) {
       const inner = inners[k];
       const ddom = inner.querySelector("input");
