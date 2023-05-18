@@ -186,7 +186,7 @@ enableCheckerInit = function () {
     return str.toLowerCase() === "none" || str.toLowerCase() === "nothing";
   }
 
-  function is_target_dropwodn(component) {
+  function is_target_dropdown(component) {
     let root = component;
     while (root && !root.id) {
       root = root.parentNode;
@@ -219,7 +219,7 @@ enableCheckerInit = function () {
     for (let k = 0; k < inners.length; k++) {
       const inner = inners[k];
       const ddom = inner.querySelector("input");
-      if (!is_target_dropwodn(ddom)) {
+      if (!is_target_dropdown(ddom)) {
         continue;
       }
 
