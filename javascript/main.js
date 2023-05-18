@@ -255,42 +255,6 @@ enableCheckerInit = function () {
     change_bg(header, is_active);
   }
 
-  const visited = new Set();
-  function operate_component_for_first_visit(component) {
-    const header = get_component_header(component);
-    function is_panel_open() {
-      return header.classList.contains("open");
-    }
-
-    visited.add(component.id);
-    // To check initial status, open the panel
-    const icon = component.querySelector("span.icon");
-    let panel_opened = false;
-    if (icon && !is_panel_open()) {
-      icon.click(); //Open
-      panel_opened = true;
-    }
-
-    const observer = new MutationObserver((mutationsList, observer) => {
-      for (const mutation of mutationsList) {
-        if (mutation.type === "childList") {
-          operate_component(component);
-
-          if (panel_opened) {
-            if (icon && is_panel_open()) {
-              icon.click(); // Close
-              panel_opened = false;
-            } else {
-              continue; // need to close but not closed
-            }
-          }
-          observer.disconnect();
-        }
-      }
-    });
-    observer.observe(component, { childList: true, subtree: true });
-  }
-
   function main_enable_checker() {
     const area = get_script_area();
     if (!area || opts === undefined) {
@@ -305,11 +269,7 @@ enableCheckerInit = function () {
     for (let j = 0; j < components.length; j++) {
       const component = components[j];
 
-      if (visited.has(component.id)) {
-        operate_component(component);
-      } else {
-        operate_component_for_first_visit(component);
-      }
+      operate_component(component);
     }
   }
   function init_network_checker(tabname, force) {
