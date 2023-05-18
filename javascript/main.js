@@ -138,11 +138,16 @@ enableCheckerInit = function () {
 
   function operate_controlnet_component(controlnet_parts) {
     let found_active_tab = false;
-    const divs = controlnet_parts.querySelectorAll(":scope>div>div>div");
+    const divs = controlnet_parts
+      .querySelector(".tabs")
+      .querySelectorAll(":scope>div");
     if (divs == undefined || divs.length < 1) {
       return null;
     }
-    const tabs = divs[0].querySelectorAll(":scope>button");
+    const tabs = controlnet_parts
+      .querySelectorAll(".tab-nav")[0]
+      .querySelectorAll("button");
+    console.log(tabs, divs);
     if (tabs.length == 0) {
       return null;
     }
