@@ -1,6 +1,11 @@
 
 # Checker of "enable" status
 
+[![License](https://img.shields.io/badge/License-AGPL%203.0-blue.svg)](https://github.com/shirayu/sd-webui-enable-checker/blob/main/LICENSE.txt)
+[![CI](https://github.com/shirayu/sd-webui-enable-checker/actions/workflows/ci.yml/badge.svg)](https://github.com/shirayu/sd-webui-enable-checker/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/shirayu/sd-webui-enable-checker/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/shirayu/sd-webui-enable-checker/actions/workflows/codeql-analysis.yml)
+[![Typos](https://github.com/shirayu/sd-webui-enable-checker/actions/workflows/typos.yml/badge.svg)](https://github.com/shirayu/sd-webui-enable-checker/actions/workflows/typos.yml)
+
 A simple extension for [AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
 
 ## Features
