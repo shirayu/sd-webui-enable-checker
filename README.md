@@ -6,7 +6,7 @@
 [![CodeQL](https://github.com/shirayu/sd-webui-enable-checker/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/shirayu/sd-webui-enable-checker/actions/workflows/codeql-analysis.yml)
 [![Typos](https://github.com/shirayu/sd-webui-enable-checker/actions/workflows/typos.yml/badge.svg)](https://github.com/shirayu/sd-webui-enable-checker/actions/workflows/typos.yml)
 
-- Works on [stable-diffusion-webui 1.1.1 (5ab7f213)](https://github.com/AUTOMATIC1111/stable-diffusion-webui/releases/tag/v1.1.0)
+- Tested on [sd-webui v1.2.1](https://github.com/AUTOMATIC1111/stable-diffusion-webui/releases/tag/v1.2.1) and [Mikubill/sd-webui-controlnet v1.1.174](https://github.com/Mikubill/sd-webui-controlnet)
 
 ## Features
 
