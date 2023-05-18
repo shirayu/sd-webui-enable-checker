@@ -6,6 +6,8 @@
 [![CodeQL](https://github.com/shirayu/sd-webui-enable-checker/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/shirayu/sd-webui-enable-checker/actions/workflows/codeql-analysis.yml)
 [![Typos](https://github.com/shirayu/sd-webui-enable-checker/actions/workflows/typos.yml/badge.svg)](https://github.com/shirayu/sd-webui-enable-checker/actions/workflows/typos.yml)
 
+- Works on [stable-diffusion-webui 1.1.1 (5ab7f213)](https://github.com/AUTOMATIC1111/stable-diffusion-webui/releases/tag/v1.1.0)
+
 ## Features
 
 ### Switch background color by clicking "Enable" buttons
