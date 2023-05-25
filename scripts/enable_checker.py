@@ -13,6 +13,13 @@ def on_ui_settings():
     section = ("enable_checker", "Enable Checker")
 
     shared.opts.add_option(
+        "enable_checker_fix_forever_randomly_seed",
+        shared.OptionInfo(
+            True, "Set the value of seed to -1 when Generate forever buttons are clicked", section=section
+        ),
+    )
+
+    shared.opts.add_option(
         "enable_checker_activate_dropdown_check",
         shared.OptionInfo(True, "Enable dropdown check", section=section),
     )

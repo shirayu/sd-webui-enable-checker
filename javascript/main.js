@@ -147,7 +147,6 @@ enableCheckerInit = function () {
     const tabs = controlnet_parts
       .querySelectorAll(".tab-nav")[0]
       .querySelectorAll("button");
-    console.log(tabs, divs);
     if (tabs.length == 0) {
       return null;
     }
@@ -260,7 +259,48 @@ enableCheckerInit = function () {
     change_bg(header, is_active);
   }
 
-  function main_enable_checker() {
+  function fix_seed(ev) {
+    let target;
+    if (!ev.composed) {
+      target = ev.target;
+    } else {
+      target = ev.composedPath()[0];
+    }
+
+    if (
+      target?.tagName?.toLowerCase() != "a" ||
+      target?.innerText != "Generate forever"
+    ) {
+      return;
+    }
+
+    function get_active_tab() {
+      for (const name of ["img2img", "txt2img"]) {
+        const tab = gradioApp().getElementById(`tab_${name}`);
+        if (tab && tab.style.display !== "none") {
+          return name;
+        }
+      }
+      return null;
+    }
+
+    const active_tab = get_active_tab();
+    if (active_tab === null) {
+      return;
+    }
+
+    const seed_input = gradioApp()
+      .getElementById(`${active_tab}_seed`)
+      .querySelector("input");
+    seed_input.value = -1;
+    updateInput(seed_input);
+  }
+
+  function main_enable_checker(ev) {
+    if (opts.enable_checker_fix_forever_randomly_seed) {
+      fix_seed(ev);
+    }
+
     const area = get_script_area();
     if (!area || opts === undefined) {
       return;
@@ -363,12 +403,12 @@ const init_network_checker = init_enableChecker[1];
 const main_network_checker = init_enableChecker[2];
 const onui_enable_checker = init_enableChecker[3];
 
-gradioApp().addEventListener("click", function () {
-  main_enable_checker();
+gradioApp().addEventListener("click", function (ev) {
+  main_enable_checker(ev);
 });
 
-onUiUpdate(function () {
-  main_enable_checker();
+onUiUpdate(function (ev) {
+  main_enable_checker(ev);
 });
 
 onUiLoaded(function () {
