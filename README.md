@@ -18,6 +18,12 @@
 
 ![Screenhot of LoRA check](https://user-images.githubusercontent.com/963961/230773384-660633b1-992a-45a6-afc7-2d899bb8b7d7.png)
 
+### Seed Fix
+
+Set the value of seed to ``-1`` when ``Generate forever`` buttons are clicked
+
+![Screenhot of seed fix](https://user-images.githubusercontent.com/963961/227722232-16448a23-5b44-4c59-9a65-58e59186ab50.png)
+
 ## Preferences
 
 You can set preferences:
