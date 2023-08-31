@@ -297,7 +297,8 @@ enableCheckerInit = function () {
   }
 
   function main_enable_checker(ev) {
-    if (Object.keys(opts).length == 0) { // not ready
+    if (Object.keys(opts).length == 0) {
+      // not ready
       return;
     }
     if (opts.enable_checker_fix_forever_randomly_seed) {
