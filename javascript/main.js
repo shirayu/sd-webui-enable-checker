@@ -372,7 +372,35 @@ enableCheckerInit = function () {
     log_dom.innerText = `Not found LoRA: ` + notIncluded.join(", ");
   }
 
+  function check_version_for_enable_checker() {
+    const versions_str =
+      document.getElementsByClassName("versions")[0].innerText;
+    //    console.log(versions_str);
+    const items = versions_str.split(" ");
+    if (items.length >= 2 && items[0] == "version:") {
+      const vers = items[1].replace(/^v/, "").split(".");
+
+      // Support >= v1.6.0
+      if (
+        vers.length < 2 ||
+        Number(vers[0]) < 1 ||
+        (Number(vers[0]) == 1 && Number(vers[1]) < 6)
+      ) {
+        const msg = `Unexpected version for sd-webui-enable-checker(${vers})`;
+        alert(msg);
+        console.log(msg);
+        return false;
+      }
+    }
+    return true;
+  }
+
   function onui_enable_checker() {
+    const ok = check_version_for_enable_checker();
+    if (!ok) {
+      return;
+    }
+
     ["txt2img", "img2img"].forEach((tabname) => {
       gradioApp()
         .getElementById(`${tabname}_extra_refresh`)
