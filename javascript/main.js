@@ -314,7 +314,7 @@ enableCheckerInit = function () {
       setting = new Setting();
     }
 
-    const components = area.querySelectorAll(":scope>div");
+    const components = area.querySelectorAll(":scope>div>div");
     for (let j = 0; j < components.length; j++) {
       const component = components[j];
 
