@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sd-webui-enable-checker"
-version = "2.2.1"
+version = "2.3.0"
 description = ""
 authors = ["Yuta Hayashibe <yuta@hayashibe.jp>"]
 readme = "README.md"
