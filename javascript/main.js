@@ -107,10 +107,13 @@ enableCheckerInit = function () {
     const spans = component.querySelectorAll("span");
     for (let k = 0; k < spans.length; k++) {
       const span = spans[k];
+      const text = span.innerText.toLowerCase();
       if (
-        span.innerText.toLowerCase().startsWith("enable") ||
-        span.innerText.toLowerCase().endsWith("enabled") ||
-        span.innerText.toLowerCase() == "active"
+        text.startsWith("enable") ||
+        text.endsWith("enabled") ||
+        text == "active" ||
+        text == "啟用" ||
+        text == "启用"
       ) {
         return span;
       }
