@@ -4,6 +4,7 @@
   "description": "A simple extension for Automatic1111/stable-diffusion-webui",
   "main": "index.js",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "test:eslint": "find javascript/ -type f -name '*.js' | xargs eslint",
     "test:md": "npx markdownlint *.md",
     "test": "run-s test:eslint test:md"
@@ -18,14 +19,12 @@
     "url": "https://github.com/shirayu/sd-webui-enable-checker/issues"
   },
   "homepage": "https://github.com/shirayu/sd-webui-enable-checker",
-  "dependencies": {
-  },
   "devDependencies": {
-    "eslint": ">=8.41.0",
-    "eslint-config-prettier": ">=8.6.0",
-    "eslint-plugin-prettier": ">=4.2.1",
-    "js-beautify": ">=1.14.7",
-    "markdownlint-cli": ">=0.34.0",
-    "npm-run-all": ">=4.1.5"
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "js-beautify": "^1.14.9",
+    "markdownlint-cli": "^0.37.0",
+    "npm-run-all": "^4.1.5"
   }
 }
