@@ -29,5 +29,8 @@
   },
   "engines": {
     "npm": "Use pnpm instead of npm!"
+  },
+  "dependencies": {
+    "pyright": "^1.1.329"
   }
 }
