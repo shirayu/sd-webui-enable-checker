@@ -92,11 +92,11 @@ enableCheckerInit = function () {
   }
   let setting = null;
 
-  function get_script_area() {
+  function get_script_area(suffix) {
     for (const name of ["img2img", "txt2img"]) {
       const tab = gradioApp().getElementById(`tab_${name}`);
       if (tab && tab.style.display !== "none") {
-        const area = gradioApp().getElementById(`${name}_script_container`);
+        const area = gradioApp().getElementById(`${name}${suffix}`);
         return area;
       }
     }
@@ -308,8 +308,8 @@ enableCheckerInit = function () {
       fix_seed(ev);
     }
 
-    const area = get_script_area();
-    if (!area || opts === undefined) {
+    const area_sc = get_script_area('_script_container');
+    if (!area_sc || opts === undefined) {
       return;
     }
 
@@ -317,7 +317,7 @@ enableCheckerInit = function () {
       setting = new Setting();
     }
 
-    const components = area.querySelectorAll(":scope>div>div");
+    const components = area_sc.querySelectorAll(":scope>div>div");
     for (let j = 0; j < components.length; j++) {
       const component = components[j];
 
