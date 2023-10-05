@@ -238,7 +238,7 @@ enableCheckerInit = function () {
     }
   }
 
-  function operate_component(component) {
+  function operate_component_in_script_container(component) {
     operate_dropdown(component);
     operate_value_input(component);
     const enable_span = get_enable_span(component);
@@ -258,6 +258,21 @@ enableCheckerInit = function () {
       }
     } else {
       is_active = get_sibling_checkbox_status(enable_span);
+    }
+    change_bg(header, is_active);
+  }
+
+  function operate_component_in_accordion(component) {
+    const is_open = component.classList.contains("input-accordion-open");
+    const header = get_component_header(component);
+    let is_active = is_open;
+    if (header.innerText.split("\n")[0] == "Refiner") {
+      const inputs = component.querySelectorAll('input[type="number"]');
+      if (inputs.length > 0) {
+        if (inputs[0].value == 1) {
+          is_active = false;
+        }
+      }
     }
     change_bg(header, is_active);
   }
@@ -308,20 +323,28 @@ enableCheckerInit = function () {
       fix_seed(ev);
     }
 
-    const area_sc = get_script_area('_script_container');
-    if (!area_sc || opts === undefined) {
-      return;
-    }
-
     if (!setting) {
       setting = new Setting();
     }
 
-    const components = area_sc.querySelectorAll(":scope>div>div");
-    for (let j = 0; j < components.length; j++) {
-      const component = components[j];
+    const area_acd = get_script_area("_accordions");
+    if (area_acd && opts !== undefined) {
+      const components = area_acd.querySelectorAll(
+        ":scope>div.input-accordion"
+      );
+      for (let j = 0; j < components.length; j++) {
+        const component = components[j];
+        operate_component_in_accordion(component);
+      }
+    }
 
-      operate_component(component);
+    const area_sc = get_script_area("_script_container");
+    if (area_sc && opts !== undefined) {
+      const components = area_sc.querySelectorAll(":scope>div>div");
+      for (let j = 0; j < components.length; j++) {
+        const component = components[j];
+        operate_component_in_script_container(component);
+      }
     }
   }
   function init_network_checker(tabname, force) {
