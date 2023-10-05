@@ -266,11 +266,23 @@ enableCheckerInit = function () {
     const is_open = component.classList.contains("input-accordion-open");
     const header = get_component_header(component);
     let is_active = is_open;
-    if (header.innerText.split("\n")[0] == "Refiner") {
-      const inputs = component.querySelectorAll('input[type="number"]');
-      if (inputs.length > 0) {
-        if (inputs[0].value == 1) {
-          is_active = false;
+    if (is_active && header.innerText.split("\n")[0] == "Refiner") {
+      const labels = component.querySelectorAll("label");
+      for (let j = 0; j < labels.length; j++) {
+        const label = labels[j];
+        const text = label.querySelector(":scope>span").innerText;
+        if (text == "Checkpoint") {
+          const model = label.querySelector("input");
+          if (model.value == "") {
+            is_active = false;
+            break;
+          }
+        } else if (text == "Switch at") {
+          const input = component.querySelector('input[type="number"]');
+          if (input.value == 1) {
+            is_active = false;
+            break;
+          }
         }
       }
     }
