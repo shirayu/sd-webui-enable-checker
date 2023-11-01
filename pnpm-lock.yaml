@@ -24,8 +24,8 @@ devDependencies:
     specifier: ^4.1.5
     version: 4.1.5
   pyright:
-    specifier: ^1.1.333
-    version: 1.1.333
+    specifier: ^1.1.334
+    version: 1.1.334
 
 packages:
 
@@ -1641,8 +1641,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /pyright@1.1.333:
-    resolution: {integrity: sha512-oFHXvzvg2cU1enatWqI76+sjSi+McsUBIJ9aR5W6p4kU9Rrgu+MYfXX5aHEPaZE64Vz3sNbG7IelXuAVEkyk/A==}
+  /pyright@1.1.334:
+    resolution: {integrity: sha512-EJoW78gXPeAWd0e86P8kSIbY1pO3JJxNYu2BRlv/ZflcMvCY+zpyamuQC5EcXxXtr1WzBdcQwfo/NIBqtQPEow==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     optionalDependencies:
