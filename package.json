@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/shirayu/sd-webui-enable-checker",
   "devDependencies": {
-    "eslint": "^8.52.0",
+    "eslint": "^8.54.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
     "js-beautify": "^1.14.9",
