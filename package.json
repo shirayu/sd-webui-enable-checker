@@ -20,13 +20,13 @@
   },
   "homepage": "https://github.com/shirayu/sd-webui-enable-checker",
   "devDependencies": {
-    "eslint": "^8.52.0",
+    "eslint": "^8.55.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
-    "js-beautify": "^1.14.9",
+    "js-beautify": "^1.14.11",
     "markdownlint-cli": "^0.37.0",
     "npm-run-all": "^4.1.5",
-    "pyright": "^1.1.334"
+    "pyright": "^1.1.338"
   },
   "engines": {
     "npm": "Use pnpm instead of npm!"
