@@ -424,7 +424,7 @@ var enableCheckerInit = function () {
         Number(vers[0]) < 1 ||
         (Number(vers[0]) == 1 && Number(vers[1]) < 7)
       ) {
-        const msg = `Unexpected version for sd-webui-enable-checker(${vers}). Plase try install the latest stable-diffusion-webui`;
+        const msg = `Unexpected version for sd-webui-enable-checker(${vers}). Please try install the latest stable-diffusion-webui`;
         alert(msg);
         console.log(msg);
         return false;
