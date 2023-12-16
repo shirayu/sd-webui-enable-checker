@@ -1,4 +1,4 @@
-enableCheckerInit = function () {
+var enableCheckerInit = function () {
   function isDarkColor(color) {
     if (color.length == 0) {
       return false;
@@ -263,9 +263,9 @@ enableCheckerInit = function () {
   }
 
   function operate_component_in_accordion(component) {
-    const is_open = component.classList.contains("input-accordion-open");
     const header = get_component_header(component);
-    let is_active = is_open;
+    const checkbox = header.querySelector("input[type=checkbox]");
+    let is_active = checkbox.checked;
     if (is_active && header.innerText.split("\n")[0] == "Refiner") {
       const labels = component.querySelectorAll("label");
       for (let j = 0; j < labels.length; j++) {
@@ -474,6 +474,10 @@ const main_network_checker = init_enableChecker[2];
 const onui_enable_checker = init_enableChecker[3];
 
 gradioApp().addEventListener("click", function (ev) {
+  main_enable_checker(ev);
+});
+
+gradioApp().addEventListener("change", function (ev) {
   main_enable_checker(ev);
 });
 
