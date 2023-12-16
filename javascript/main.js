@@ -418,13 +418,13 @@ var enableCheckerInit = function () {
     if (items.length >= 2 && items[0] == "version:") {
       const vers = items[1].replace(/^v/, "").split(".");
 
-      // Support >= v1.6.0
+      // Support >= v1.7.0
       if (
         vers.length < 2 ||
         Number(vers[0]) < 1 ||
-        (Number(vers[0]) == 1 && Number(vers[1]) < 6)
+        (Number(vers[0]) == 1 && Number(vers[1]) < 7)
       ) {
-        const msg = `Unexpected version for sd-webui-enable-checker(${vers})`;
+        const msg = `Unexpected version for sd-webui-enable-checker(${vers}). Plase try install the latest stable-diffusion-webui`;
         alert(msg);
         console.log(msg);
         return false;
