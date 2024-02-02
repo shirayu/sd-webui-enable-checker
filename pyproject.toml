@@ -7,30 +7,28 @@ readme = "README.md"
 packages = []
 
 [tool.poetry.dependencies]
-python = ">=3.8,<3.12"
+python = ">=3.10,<3.12"
 
 
 [tool.poetry.dev-dependencies]
-coverage = ">=5.3"
-flake8 = ">=3.8.4"
-isort = ">=5.9.3"
-pydocstyle = ">=5.1.1"
-black = ">=21.10b0"
+ruff = "^0.1.13"
 
 [build-system]
 requires = ["poetry-core>=1.3.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.pyright]
-pythonVersion = "3.9"
+pythonVersion = "3.10"
 typeCheckingMode = "basic"
 reportUnusedVariable = "warning"
 exclude = [".venv", "**/node_modules", "**/__pycache__",]
 reportPrivateImportUsage = "information"
 
-[tool.black]
+[tool.ruff]
 line-length = 120
+target-version = "py310"
 
-[tool.isort]
-profile = "black"
-line_length = 120
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = []
+fixable = ["ALL"]
