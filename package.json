@@ -6,8 +6,9 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "test:eslint": "find javascript/ -type f -name '*.js' | xargs eslint",
+    "test:prettier": "find javascript/ -type f -name '*.js' | xargs prettier --check",
     "test:md": "npx markdownlint *.md",
-    "test": "run-s test:eslint test:md"
+    "test": "run-s test:eslint test:prettier test:md"
   },
   "repository": {
     "type": "git",

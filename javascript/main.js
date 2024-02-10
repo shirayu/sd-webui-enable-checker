@@ -143,7 +143,7 @@ var enableCheckerInit = function () {
     let found_active_tab = false;
 
     const accordions = controlnet_parts.querySelectorAll(
-      "#txt2img_controlnet_accordions .input-accordion,#img2img_controlnet_accordions .input-accordion"
+      "#txt2img_controlnet_accordions .input-accordion,#img2img_controlnet_accordions .input-accordion",
     );
     if (accordions.length > 0) {
       // WebUI Forge
@@ -359,7 +359,7 @@ var enableCheckerInit = function () {
     const area_acd = get_script_area("_accordions");
     if (area_acd && opts !== undefined) {
       const components = area_acd.querySelectorAll(
-        ":scope>div.input-accordion"
+        ":scope>div.input-accordion",
       );
       for (let j = 0; j < components.length; j++) {
         const component = components[j];
@@ -415,7 +415,7 @@ var enableCheckerInit = function () {
     const matches = dom.value.matchAll(regex);
     const target_lora_names = Array.from(matches, (m) => m[1]);
     const notIncluded = target_lora_names.filter(
-      (item) => !setting.loras.includes(item)
+      (item) => !setting.loras.includes(item),
     );
 
     if (notIncluded.length == 0) {
@@ -451,8 +451,8 @@ var enableCheckerInit = function () {
           if (v2 < 11) {
             err = true;
           }
-        }else{
-            err = true;
+        } else {
+          err = true;
         }
       }
 
@@ -475,7 +475,7 @@ var enableCheckerInit = function () {
     ["txt2img", "img2img"].forEach((tabname) => {
       gradioApp()
         .querySelector(
-          `#${tabname}_extra_refresh,#${tabname}_lora_extra_refresh_internal`
+          `#${tabname}_extra_refresh,#${tabname}_lora_extra_refresh_internal`,
         )
         .addEventListener("click", () => {
           init_network_checker(tabname, true);
@@ -484,7 +484,7 @@ var enableCheckerInit = function () {
       ["prompt", "neg_prompt"].forEach((target_prompt) => {
         const prefix = `${tabname}_${target_prompt}`;
         const textarea = gradioApp().querySelector(
-          `#${prefix} > label > textarea`
+          `#${prefix} > label > textarea`,
         );
         textarea.addEventListener("input", () => {
           init_network_checker(tabname, false);
