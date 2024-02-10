@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "test:eslint": "find javascript/ -type f -name '*.js' | xargs eslint",
-    "test:prettier": "find javascript/ -type f -name '*.js' | xargs prettier --check",
+    "test:eslint": "eslint javascript",
+    "test:prettier": "prettier --check javascript",
     "test:md": "npx markdownlint *.md",
     "test": "run-s test:eslint test:prettier test:md"
   },
