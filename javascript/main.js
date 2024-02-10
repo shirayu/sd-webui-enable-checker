@@ -457,7 +457,7 @@ var enableCheckerInit = function () {
       }
 
       if (err) {
-        const msg = `Unexpected version (${vers}) for sd-webui-enable-checker. Please try install the latest WebUI and this extention`;
+        const msg = `Unexpected version (${vers}) for sd-webui-enable-checker. Please try install the latest WebUI and this extension`;
         alert(msg);
         console.log(msg);
         return false;
