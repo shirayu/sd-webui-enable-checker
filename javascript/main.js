@@ -141,6 +141,22 @@ var enableCheckerInit = function () {
 
   function operate_controlnet_component(controlnet_parts) {
     let found_active_tab = false;
+
+    const accordions = controlnet_parts
+      .querySelectorAll("#txt2img_controlnet_accordions .input-accordion,#img2img_controlnet_accordions .input-accordion");
+    if (accordions.length > 0) {
+      // WebUI Forge
+      for (let k = 0; k < accordions.length; k++) {
+        const accordion = accordions[k];
+        const accordion_header = accordion.querySelector("div.label-wrap");
+        const enable_span = accordion.querySelector("input[type=checkbox]")
+        const is_active = enable_span.checked;
+        change_bg(accordion_header, is_active);
+        found_active_tab = found_active_tab || is_active;
+      }
+      return found_active_tab;
+    }
+
     const divs = controlnet_parts
       .querySelector(".tabs")
       .querySelectorAll(":scope>div");
@@ -441,7 +457,7 @@ var enableCheckerInit = function () {
 
     ["txt2img", "img2img"].forEach((tabname) => {
       gradioApp()
-        .getElementById(`${tabname}_extra_refresh`)
+        .querySelector(`#${tabname}_extra_refresh,#${tabname}_lora_extra_refresh_internal`)
         .addEventListener("click", () => {
           init_network_checker(tabname, true);
         });
