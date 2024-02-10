@@ -142,14 +142,15 @@ var enableCheckerInit = function () {
   function operate_controlnet_component(controlnet_parts) {
     let found_active_tab = false;
 
-    const accordions = controlnet_parts
-      .querySelectorAll("#txt2img_controlnet_accordions .input-accordion,#img2img_controlnet_accordions .input-accordion");
+    const accordions = controlnet_parts.querySelectorAll(
+      "#txt2img_controlnet_accordions .input-accordion,#img2img_controlnet_accordions .input-accordion"
+    );
     if (accordions.length > 0) {
       // WebUI Forge
       for (let k = 0; k < accordions.length; k++) {
         const accordion = accordions[k];
         const accordion_header = accordion.querySelector("div.label-wrap");
-        const enable_span = accordion.querySelector("input[type=checkbox]")
+        const enable_span = accordion.querySelector("input[type=checkbox]");
         const is_active = enable_span.checked;
         change_bg(accordion_header, is_active);
         found_active_tab = found_active_tab || is_active;
@@ -432,15 +433,31 @@ var enableCheckerInit = function () {
     //    console.log(versions_str);
     const items = versions_str.split(" ");
     if (items.length >= 2 && items[0] == "version:") {
-      const vers = items[1].replace(/^v/, "").split(".");
+      const vers = items[1].split(".");
+      let err = false;
 
-      // Support >= v1.7.0
-      if (
-        vers.length < 2 ||
-        Number(vers[0]) < 1 ||
-        (Number(vers[0]) == 1 && Number(vers[1]) < 7)
-      ) {
-        const msg = `Unexpected version for sd-webui-enable-checker(${vers}). Please try install the latest stable-diffusion-webui`;
+      if (vers.length < 2) {
+        err = true;
+      } else {
+        // Support >= v1.7.0 for sd-webui
+        if (vers[0].startsWith("v")) {
+          const v0 = Number(vers[0].substring(1));
+          if (v0 < 1 || (v0 == 1 && Number(vers[1]) < 7)) {
+            err = true;
+          }
+        } else if (vers[0].startsWith("f")) {
+          // Support >= v0.0.11 for sd-webui-forge
+          const v2 = Number(vers[2].split("-")[0]);
+          if (v2 < 11) {
+            err = true;
+          }
+        }else{
+            err = true;
+        }
+      }
+
+      if (err) {
+        const msg = `Unexpected version (${vers}) for sd-webui-enable-checker. Please try install the latest WebUI and this extention`;
         alert(msg);
         console.log(msg);
         return false;
@@ -457,7 +474,9 @@ var enableCheckerInit = function () {
 
     ["txt2img", "img2img"].forEach((tabname) => {
       gradioApp()
-        .querySelector(`#${tabname}_extra_refresh,#${tabname}_lora_extra_refresh_internal`)
+        .querySelector(
+          `#${tabname}_extra_refresh,#${tabname}_lora_extra_refresh_internal`
+        )
         .addEventListener("click", () => {
           init_network_checker(tabname, true);
         });
