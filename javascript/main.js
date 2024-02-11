@@ -113,7 +113,8 @@ var enableCheckerInit = function () {
         text.endsWith("enabled") ||
         text == "active" ||
         text == "啟用" ||
-        text == "启用"
+        text == "启用" ||
+        text == "Share attention in batch".toLowerCase() // sd-webui-forge
       ) {
         return span;
       }
