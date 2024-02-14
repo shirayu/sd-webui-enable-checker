@@ -387,13 +387,19 @@ var enableCheckerInit = function () {
       return;
     }
 
-    const name_doms = gradioApp()
-      .getElementById(`${tabname}_lora_cards`)
-      .querySelectorAll(".name");
-    setting.loras = [];
-    for (let j = 0; j < name_doms.length; j++) {
-      setting.loras.push(name_doms[j].innerText);
-    }
+    const reload = async () => {
+      const name_doms = gradioApp()
+        .getElementById(`${tabname}_lora_cards`)
+        .querySelectorAll(".name");
+      setting.loras = [];
+      for (let j = 0; j < name_doms.length; j++) {
+        setting.loras.push(name_doms[j].innerText);
+      }
+    };
+
+    setTimeout(async () => {
+      await reload();
+    }, 1000);
   }
 
   function main_network_checker(prefix) {
@@ -431,7 +437,6 @@ var enableCheckerInit = function () {
   function check_version_for_enable_checker() {
     const versions_str =
       document.getElementsByClassName("versions")[0].innerText;
-    //    console.log(versions_str);
     const items = versions_str.split(" ");
     if (items.length >= 2 && items[0] == "version:") {
       const vers = items[1].split(".");
