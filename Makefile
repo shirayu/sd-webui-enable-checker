@@ -7,7 +7,7 @@ TARGET_DIRS:=./scripts
 
 ruff:
 	ruff format --respect-gitignore --check
-	ruff --respect-gitignore
+	ruff check --respect-gitignore
 
 yamllint:
 	find . \( -name node_modules -o -name .venv \) -prune -o -type f -name '*.yml' -print \
@@ -28,4 +28,4 @@ lint_node: markdownlint pyright
 
 style:
 	find $(TARGET_DIRS) | grep '\.py$$' | xargs ruff format --respect-gitignore
-	find $(TARGET_DIRS) | grep '\.py$$' | xargs ruff --respect-gitignore
+	find $(TARGET_DIRS) | grep '\.py$$' | xargs ruff check --respect-gitignore
