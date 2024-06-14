@@ -259,14 +259,27 @@ var enableCheckerInit = function () {
   function operate_component_in_script_container(component) {
     operate_dropdown(component);
     operate_value_input(component);
+
+    const header = get_component_header(component);
+    if (!header) {
+      return;
+    }
+
+    // check modules.ui_components.InputAccordion
+    let is_active = false;
+    const checkbox = header.querySelector("input[type=checkbox]");
+    if (checkbox) {
+      is_active = checkbox.checked;
+      change_bg(header, is_active);
+      return;
+    }
+
     const enable_span = get_enable_span(component);
     if (!enable_span) {
       return;
     }
 
-    const header = get_component_header(component);
     const controlnet_parts = component.querySelector("#controlnet");
-    let is_active = false;
     if (controlnet_parts) {
       is_active = operate_controlnet_component(controlnet_parts);
 
