@@ -18,10 +18,7 @@ const enableCheckerInit = () => {
       const tempElem = document.createElement("div");
       tempElem.style.color = color;
       document.body.appendChild(tempElem);
-      [r, g, b] = window
-        .getComputedStyle(tempElem)
-        .color.match(/\d+/g)
-        .map(Number);
+      [r, g, b] = window.getComputedStyle(tempElem).color.match(/\d+/g).map(Number);
       document.body.removeChild(tempElem);
     }
 
@@ -31,26 +28,19 @@ const enableCheckerInit = () => {
 
   class Setting {
     constructor() {
-      this.enable_checker_activate_dropdown_check =
-        opts.enable_checker_activate_dropdown_check;
-      this.enable_checker_activate_weight_check =
-        opts.enable_checker_activate_weight_check;
-      this.enable_checker_activate_extra_network_check =
-        opts.enable_checker_activate_extra_network_check;
+      this.enable_checker_activate_dropdown_check = opts.enable_checker_activate_dropdown_check;
+      this.enable_checker_activate_weight_check = opts.enable_checker_activate_weight_check;
+      this.enable_checker_activate_extra_network_check = opts.enable_checker_activate_extra_network_check;
 
       this.loras = null;
 
       if (opts?.enable_checker_custom_color) {
         this.color_enable = opts.enable_checker_custom_color_enable;
         this.color_disable = opts.enable_checker_custom_color_disable;
-        this.color_dropdown_enable =
-          opts.enable_checker_custom_color_dropdown_enable;
-        this.color_dropdown_disable =
-          opts.enable_checker_custom_color_dropdown_disable;
-        this.custom_color_zero_weihgt =
-          opts.enable_checker_custom_color_zero_weihgt;
-        this.color_invalid_additional_networks =
-          opts.enable_checker_custom_color_invalid_additional_networks;
+        this.color_dropdown_enable = opts.enable_checker_custom_color_dropdown_enable;
+        this.color_dropdown_disable = opts.enable_checker_custom_color_dropdown_disable;
+        this.custom_color_zero_weihgt = opts.enable_checker_custom_color_zero_weihgt;
+        this.color_invalid_additional_networks = opts.enable_checker_custom_color_invalid_additional_networks;
       } else {
         if (isDarkColor(document.body.style.backgroundColor)) {
           this.color_enable = "#237366";
@@ -67,14 +57,8 @@ const enableCheckerInit = () => {
       }
 
       this.componentId2componentIndex = {};
-      for (
-        let index = 0;
-        index < window.gradio_config.components.length;
-        index++
-      ) {
-        this.componentId2componentIndex[
-          window.gradio_config.components[index].id
-        ] = index;
+      for (let index = 0; index < window.gradio_config.components.length; index++) {
+        this.componentId2componentIndex[window.gradio_config.components[index].id] = index;
         const elem_id = window.gradio_config.components[index]?.props?.elem_id;
         if (elem_id) {
           this.componentId2componentIndex[elem_id] = index;
@@ -88,9 +72,7 @@ const enableCheckerInit = () => {
         target = Number(id.replace(/^component-/, ""));
       }
 
-      return window.gradio_config.components[
-        this.componentId2componentIndex[target]
-      ];
+      return window.gradio_config.components[this.componentId2componentIndex[target]];
     }
   }
   let setting = null;
@@ -162,15 +144,11 @@ const enableCheckerInit = () => {
       return found_active_tab;
     }
 
-    const divs = controlnet_parts
-      .querySelector(".tabs")
-      .querySelectorAll(":scope>div");
+    const divs = controlnet_parts.querySelector(".tabs").querySelectorAll(":scope>div");
     if (divs === undefined || divs.length < 1) {
       return null;
     }
-    const tabs = controlnet_parts
-      .querySelectorAll(".tab-nav")[0]
-      .querySelectorAll("button");
+    const tabs = controlnet_parts.querySelectorAll(".tab-nav")[0].querySelectorAll("button");
     if (tabs.length === 0) {
       return null;
     }
@@ -331,10 +309,7 @@ const enableCheckerInit = () => {
       target = ev.composedPath()[0];
     }
 
-    if (
-      target?.tagName?.toLowerCase() !== "a" ||
-      target?.innerText !== "Generate forever"
-    ) {
+    if (target?.tagName?.toLowerCase() !== "a" || target?.innerText !== "Generate forever") {
       return;
     }
 
@@ -353,9 +328,7 @@ const enableCheckerInit = () => {
       return;
     }
 
-    const seed_input = gradioApp()
-      .getElementById(`${active_tab}_seed`)
-      .querySelector("input");
+    const seed_input = gradioApp().getElementById(`${active_tab}_seed`).querySelector("input");
     seed_input.value = -1;
     updateInput(seed_input);
   }
@@ -375,9 +348,7 @@ const enableCheckerInit = () => {
 
     const area_acd = get_script_area("_accordions");
     if (area_acd && opts !== undefined) {
-      const components = area_acd.querySelectorAll(
-        ":scope>div.input-accordion",
-      );
+      const components = area_acd.querySelectorAll(":scope>div.input-accordion");
       for (let j = 0; j < components.length; j++) {
         const component = components[j];
         operate_component_in_accordion(component);
@@ -394,10 +365,7 @@ const enableCheckerInit = () => {
     }
   }
   function init_network_checker(tabname, force) {
-    if (
-      setting === null ||
-      !setting?.enable_checker_activate_extra_network_check
-    ) {
+    if (setting === null || !setting?.enable_checker_activate_extra_network_check) {
       return;
     }
     if (!force && setting.loras !== null) {
@@ -405,9 +373,7 @@ const enableCheckerInit = () => {
     }
 
     const reload = async () => {
-      const name_doms = gradioApp()
-        .getElementById(`${tabname}_lora_cards`)
-        .querySelectorAll(".name");
+      const name_doms = gradioApp().getElementById(`${tabname}_lora_cards`).querySelectorAll(".name");
       setting.loras = [];
       for (let j = 0; j < name_doms.length; j++) {
         setting.loras.push(name_doms[j].innerText);
@@ -420,10 +386,7 @@ const enableCheckerInit = () => {
   }
 
   function main_network_checker(prefix) {
-    if (
-      setting === null ||
-      !setting?.enable_checker_activate_extra_network_check
-    ) {
+    if (setting === null || !setting?.enable_checker_activate_extra_network_check) {
       return;
     }
     const dom = gradioApp().querySelector(`#${prefix} > label > textarea`);
@@ -438,9 +401,7 @@ const enableCheckerInit = () => {
     const regex = /<lora:(.*?):[^>]+>/g;
     const matches = dom.value.matchAll(regex);
     const target_lora_names = Array.from(matches, (m) => m[1]);
-    const notIncluded = target_lora_names.filter(
-      (item) => !setting.loras.includes(item),
-    );
+    const notIncluded = target_lora_names.filter((item) => !setting.loras.includes(item));
 
     if (notIncluded.length === 0) {
       dom.style.background = "";
@@ -452,8 +413,7 @@ const enableCheckerInit = () => {
   }
 
   function check_version_for_enable_checker() {
-    const versions_str =
-      document.getElementsByClassName("versions")[0].innerText;
+    const versions_str = document.getElementsByClassName("versions")[0].innerText;
     const items = versions_str.split(" ");
     if (items.length >= 2 && items[0] === "version:") {
       const vers = items[1].split(".");
@@ -497,18 +457,14 @@ const enableCheckerInit = () => {
 
     for (const tabname of ["txt2img", "img2img"]) {
       gradioApp()
-        .querySelector(
-          `#${tabname}_extra_refresh,#${tabname}_lora_extra_refresh_internal`,
-        )
+        .querySelector(`#${tabname}_extra_refresh,#${tabname}_lora_extra_refresh_internal`)
         .addEventListener("click", () => {
           init_network_checker(tabname, true);
         });
 
       for (const target_prompt of ["prompt", "neg_prompt"]) {
         const prefix = `${tabname}_${target_prompt}`;
-        const textarea = gradioApp().querySelector(
-          `#${prefix} > label > textarea`,
-        );
+        const textarea = gradioApp().querySelector(`#${prefix} > label > textarea`);
         textarea.addEventListener("input", () => {
           init_network_checker(tabname, false);
           main_network_checker(prefix);
@@ -517,12 +473,7 @@ const enableCheckerInit = () => {
     }
   }
 
-  return [
-    main_enable_checker,
-    init_network_checker,
-    main_network_checker,
-    onui_enable_checker,
-  ];
+  return [main_enable_checker, init_network_checker, main_network_checker, onui_enable_checker];
 };
 
 const init_enableChecker = enableCheckerInit();
