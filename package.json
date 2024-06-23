@@ -7,7 +7,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "test:biome": "biome check",
-    "format": "iome format --write",
+    "format": "biome format --write",
     "test:md": "npx markdownlint *.md",
     "test": "run-s test:biome test:md"
   },

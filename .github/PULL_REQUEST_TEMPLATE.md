@@ -3,7 +3,7 @@
 Please format codes before pull request. CI will also check formats.
 
 For example:
-    $ pnpm prettier
+    $ pnpm format
     $ poetry run ruff format --respect-gitignore ./scripts
     $ poetry run ruff --respect-gitignore ./scripts
 
