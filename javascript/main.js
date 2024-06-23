@@ -1,9 +1,11 @@
-var enableCheckerInit = function () {
+const enableCheckerInit = () => {
   function isDarkColor(color) {
-    if (color.length == 0) {
+    if (color.length === 0) {
       return false;
     }
-    let r, g, b;
+    let r;
+    let g;
+    let b;
 
     if (color.startsWith("#")) {
       [r, g, b] = color
@@ -81,12 +83,13 @@ var enableCheckerInit = function () {
     }
 
     getComponent(id) {
+      let target = id;
       if (id.startsWith("component-")) {
-        id = Number(id.replace(/^component-/, ""));
+        target = Number(id.replace(/^component-/, ""));
       }
 
       return window.gradio_config.components[
-        this.componentId2componentIndex[id]
+        this.componentId2componentIndex[target]
       ];
     }
   }
@@ -111,10 +114,10 @@ var enableCheckerInit = function () {
       if (
         text.startsWith("enable") ||
         text.endsWith("enabled") ||
-        text == "active" ||
-        text == "啟用" ||
-        text == "启用" ||
-        text == "Share attention in batch".toLowerCase() // sd-webui-forge
+        text === "active" ||
+        text === "啟用" ||
+        text === "启用" ||
+        text === "Share attention in batch".toLowerCase() // sd-webui-forge
       ) {
         return span;
       }
@@ -125,7 +128,7 @@ var enableCheckerInit = function () {
     const snodes = node.parentNode.childNodes;
     for (let k = 0; k < snodes.length; k++) {
       const snode = snodes[k];
-      if (snode.nodeName == "INPUT") {
+      if (snode.nodeName === "INPUT") {
         return snode.checked;
       }
     }
@@ -162,13 +165,13 @@ var enableCheckerInit = function () {
     const divs = controlnet_parts
       .querySelector(".tabs")
       .querySelectorAll(":scope>div");
-    if (divs == undefined || divs.length < 1) {
+    if (divs === undefined || divs.length < 1) {
       return null;
     }
     const tabs = controlnet_parts
       .querySelectorAll(".tab-nav")[0]
       .querySelectorAll("button");
-    if (tabs.length == 0) {
+    if (tabs.length === 0) {
       return null;
     }
     for (let k = 1; k < divs.length; k++) {
@@ -199,7 +202,7 @@ var enableCheckerInit = function () {
       if (!input) {
         continue;
       }
-      if (input.value == 0) {
+      if (input.value === 0) {
         input.style.backgroundColor = setting.custom_color_zero_weihgt;
       } else {
         input.style.backgroundColor = "";
@@ -297,20 +300,20 @@ var enableCheckerInit = function () {
     const header = get_component_header(component);
     const checkbox = header.querySelector("input[type=checkbox]");
     let is_active = checkbox.checked;
-    if (is_active && header.innerText.split("\n")[0] == "Refiner") {
+    if (is_active && header.innerText.split("\n")[0] === "Refiner") {
       const labels = component.querySelectorAll("label");
       for (let j = 0; j < labels.length; j++) {
         const label = labels[j];
         const text = label.querySelector(":scope>span").innerText;
-        if (text == "Checkpoint") {
+        if (text === "Checkpoint") {
           const model = label.querySelector("input");
-          if (model.value == "") {
+          if (model.value === "") {
             is_active = false;
             break;
           }
-        } else if (text == "Switch at") {
+        } else if (text === "Switch at") {
           const input = component.querySelector('input[type="number"]');
-          if (input.value == 1) {
+          if (input.value === 1) {
             is_active = false;
             break;
           }
@@ -329,8 +332,8 @@ var enableCheckerInit = function () {
     }
 
     if (
-      target?.tagName?.toLowerCase() != "a" ||
-      target?.innerText != "Generate forever"
+      target?.tagName?.toLowerCase() !== "a" ||
+      target?.innerText !== "Generate forever"
     ) {
       return;
     }
@@ -358,7 +361,7 @@ var enableCheckerInit = function () {
   }
 
   function main_enable_checker(ev) {
-    if (Object.keys(opts).length == 0) {
+    if (Object.keys(opts).length === 0) {
       // not ready
       return;
     }
@@ -396,7 +399,8 @@ var enableCheckerInit = function () {
       !setting?.enable_checker_activate_extra_network_check
     ) {
       return;
-    } else if (!force && setting.loras !== null) {
+    }
+    if (!force && setting.loras !== null) {
       return;
     }
 
@@ -438,20 +442,20 @@ var enableCheckerInit = function () {
       (item) => !setting.loras.includes(item),
     );
 
-    if (notIncluded.length == 0) {
+    if (notIncluded.length === 0) {
       dom.style.background = "";
       log_dom.innerText = "";
       return;
     }
     dom.style.background = setting.color_invalid_additional_networks;
-    log_dom.innerText = `Not found LoRA: ` + notIncluded.join(", ");
+    log_dom.innerText = `Not found LoRA: ${notIncluded.join(", ")}`;
   }
 
   function check_version_for_enable_checker() {
     const versions_str =
       document.getElementsByClassName("versions")[0].innerText;
     const items = versions_str.split(" ");
-    if (items.length >= 2 && items[0] == "version:") {
+    if (items.length >= 2 && items[0] === "version:") {
       const vers = items[1].split(".");
       let err = false;
 
@@ -461,7 +465,7 @@ var enableCheckerInit = function () {
         // Support >= v1.7.0 for sd-webui
         if (vers[0].startsWith("v")) {
           const v0 = Number(vers[0].substring(1));
-          if (v0 < 1 || (v0 == 1 && Number(vers[1]) < 7)) {
+          if (v0 < 1 || (v0 === 1 && Number(vers[1]) < 7)) {
             err = true;
           }
         } else if (vers[0].startsWith("f")) {
@@ -491,7 +495,7 @@ var enableCheckerInit = function () {
       return;
     }
 
-    ["txt2img", "img2img"].forEach((tabname) => {
+    for (const tabname of ["txt2img", "img2img"]) {
       gradioApp()
         .querySelector(
           `#${tabname}_extra_refresh,#${tabname}_lora_extra_refresh_internal`,
@@ -500,7 +504,7 @@ var enableCheckerInit = function () {
           init_network_checker(tabname, true);
         });
 
-      ["prompt", "neg_prompt"].forEach((target_prompt) => {
+      for (const target_prompt of ["prompt", "neg_prompt"]) {
         const prefix = `${tabname}_${target_prompt}`;
         const textarea = gradioApp().querySelector(
           `#${prefix} > label > textarea`,
@@ -509,8 +513,8 @@ var enableCheckerInit = function () {
           init_network_checker(tabname, false);
           main_network_checker(prefix);
         });
-      });
-    });
+      }
+    }
   }
 
   return [
@@ -527,18 +531,18 @@ const init_network_checker = init_enableChecker[1];
 const main_network_checker = init_enableChecker[2];
 const onui_enable_checker = init_enableChecker[3];
 
-gradioApp().addEventListener("click", function (ev) {
+gradioApp().addEventListener("click", (ev) => {
   main_enable_checker(ev);
 });
 
-gradioApp().addEventListener("change", function (ev) {
+gradioApp().addEventListener("change", (ev) => {
   main_enable_checker(ev);
 });
 
-onUiUpdate(function (ev) {
+onUiUpdate((ev) => {
   main_enable_checker(ev);
 });
 
-onUiLoaded(function () {
+onUiLoaded(() => {
   onui_enable_checker();
 });
