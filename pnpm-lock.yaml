@@ -18,8 +18,8 @@ importers:
         specifier: ^4.1.5
         version: 4.1.5
       pyright:
-        specifier: ^1.1.375
-        version: 1.1.375
+        specifier: ^1.1.376
+        version: 1.1.376
 
 packages:
 
@@ -309,8 +309,8 @@ packages:
   hosted-git-info@2.8.9:
     resolution: {integrity: sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==}
 
-  ignore@5.3.1:
-    resolution: {integrity: sha512-5Fytz/IraMjqpwfd34ke28PTVMjZjJG2MPn5t7OE4eUCUNf8BAa7b5WUS9/Qvr6mwOQS7Mk6vdsMno5he+T8Xw==}
+  ignore@5.3.2:
+    resolution: {integrity: sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==}
     engines: {node: '>= 4'}
 
   ini@4.1.3:
@@ -523,8 +523,8 @@ packages:
     resolution: {integrity: sha512-uxFIHU0YlHYhDQtV4R9J6a52SLx28BCjT+4ieh7IGbgwVJWO+km431c4yRlREUAsAmt/uMjQUyQHNEPf0M39CA==}
     engines: {node: '>=6'}
 
-  pyright@1.1.375:
-    resolution: {integrity: sha512-DeSxwNWSFXPr079RFtvUW8O30XC80tuQf7KLMlmj5aks7isDEzcjSQkvMKiXd+a4Ueo+JTq0WsDlEoN/2BYKJA==}
+  pyright@1.1.376:
+    resolution: {integrity: sha512-on/vUGr8aOF7L9tRdMn4Xzj3Zs+fAyR17MJ9XO3VjlsexutPcDcpWUBLvCZf3wYL0r+CmrAxKAxcBF9ktarHow==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -1041,7 +1041,7 @@ snapshots:
 
   hosted-git-info@2.8.9: {}
 
-  ignore@5.3.1: {}
+  ignore@5.3.2: {}
 
   ini@4.1.3: {}
 
@@ -1161,7 +1161,7 @@ snapshots:
       commander: 12.1.0
       get-stdin: 9.0.0
       glob: 10.4.5
-      ignore: 5.3.1
+      ignore: 5.3.2
       js-yaml: 4.1.0
       jsonc-parser: 3.2.1
       jsonpointer: 5.0.1
@@ -1255,7 +1255,7 @@ snapshots:
 
   punycode.js@2.3.1: {}
 
-  pyright@1.1.375:
+  pyright@1.1.376:
     optionalDependencies:
       fsevents: 2.3.3
 
