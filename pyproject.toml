@@ -1,27 +1,21 @@
-[tool.poetry]
+[project]
 name = "sd-webui-enable-checker"
 version = "2.6.3"
 description = ""
-authors = ["Yuta Hayashibe <yuta@hayashibe.jp>"]
 readme = "README.md"
-packages = []
+authors = [{ author = "Yuta Hayashibe", email = "yuta@hayashibe.jp" }]
+requires-python = ">=3.10,<3.12"
+license = { file = "LICENSE" }
+dependencies = []
 
-[tool.poetry.dependencies]
-python = ">=3.10,<3.12"
-
-
-[tool.poetry.dev-dependencies]
-ruff = ">=0.2.0"
-
-[build-system]
-requires = ["poetry-core>=1.3.0"]
-build-backend = "poetry.core.masonry.api"
+[tool.uv]
+dev-dependencies = ["ruff>=0.6.7"]
 
 [tool.pyright]
 pythonVersion = "3.10"
 typeCheckingMode = "basic"
 reportUnusedVariable = "warning"
-exclude = [".venv", "**/node_modules", "**/__pycache__",]
+exclude = [".venv", "**/node_modules", "**/__pycache__"]
 reportPrivateImportUsage = "information"
 
 [tool.ruff]
