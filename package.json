@@ -24,8 +24,8 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "markdownlint-cli": "^0.43.0",
-    "npm-run-all2": "^7.0.1",
-    "pyright": "^1.1.390"
+    "npm-run-all2": "^7.0.2",
+    "pyright": "^1.1.391"
   },
   "engines": {
     "npm": "Use pnpm instead of npm!"
