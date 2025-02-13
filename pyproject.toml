@@ -9,10 +9,7 @@ license = { file = "LICENSE" }
 dependencies = []
 
 [tool.uv]
-dev-dependencies = [
-    "ruff>=0.6.7",
-    "yamllint>=1.35.1",
-]
+dev-dependencies = ["ruff>=0.6.7", "yamllint>=1.35.1"]
 
 [tool.pyright]
 pythonVersion = "3.10"
