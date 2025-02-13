@@ -60,4 +60,5 @@ jobs:
           version: 3.x
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: uv run task -p all_for_ci
+      - run: uv run task -p lint
+      - run: uv run task -p test
