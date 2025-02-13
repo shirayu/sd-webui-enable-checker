@@ -25,7 +25,7 @@
     "@biomejs/biome": "1.9.4",
     "markdownlint-cli": "^0.44.0",
     "npm-run-all2": "^7.0.2",
-    "pyright": "^1.1.393"
+    "pyright": "^1.1.394"
   },
   "engines": {
     "npm": "Use pnpm instead of npm!"
