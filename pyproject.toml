@@ -1,6 +1,6 @@
 [project]
 name = "sd-webui-enable-checker"
-version = "2.6.3"
+version = "2.6.4"
 description = ""
 readme = "README.md"
 authors = [{ author = "Yuta Hayashibe", email = "yuta@hayashibe.jp" }]
