@@ -31,6 +31,10 @@ def on_ui_settings():
         "enable_checker_activate_extra_network_check",
         shared.OptionInfo(True, "Enable extra network check", section=section),
     )
+    shared.opts.add_option(
+        "enable_checker_check_version_compatibility",
+        shared.OptionInfo(True, "Check version compatibility", section=section),
+    )
 
     shared.opts.add_option(
         "enable_checker_custom_color",

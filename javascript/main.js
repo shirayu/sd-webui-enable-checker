@@ -31,6 +31,7 @@ const enableCheckerInit = () => {
       this.enable_checker_activate_dropdown_check = opts.enable_checker_activate_dropdown_check;
       this.enable_checker_activate_weight_check = opts.enable_checker_activate_weight_check;
       this.enable_checker_activate_extra_network_check = opts.enable_checker_activate_extra_network_check;
+      this.enable_checker_check_version_compatibility = opts.enable_checker_check_version_compatibility;
 
       this.loras = null;
 
@@ -338,12 +339,19 @@ const enableCheckerInit = () => {
       // not ready
       return;
     }
+
     if (opts.enable_checker_fix_forever_randomly_seed) {
       fix_seed(ev);
     }
 
     if (!setting) {
       setting = new Setting();
+      if (setting.enable_checker_check_version_compatibility) {
+        const ok = check_version_for_enable_checker();
+        if (!ok) {
+          return;
+        }
+      }
     }
 
     const area_acd = get_script_area("_accordions");
@@ -440,7 +448,7 @@ const enableCheckerInit = () => {
       }
 
       if (err) {
-        const msg = `Unexpected version (${vers}) for sd-webui-enable-checker. Please try install the latest WebUI and this extension`;
+        const msg = `Unexpected version (${vers}) for sd-webui-enable-checker. Please try install the latest WebUI and this extension.\n\n[Hint] You can disable this version check by removing the checkmark of "Check version compatibility" in "Enable Checker" setting of the "Setting" tab.`;
         alert(msg);
         console.log(msg);
         return false;
@@ -450,11 +458,6 @@ const enableCheckerInit = () => {
   }
 
   function onui_enable_checker() {
-    const ok = check_version_for_enable_checker();
-    if (!ok) {
-      return;
-    }
-
     for (const tabname of ["txt2img", "img2img"]) {
       gradioApp()
         .querySelector(`#${tabname}_extra_refresh,#${tabname}_lora_extra_refresh_internal`)
