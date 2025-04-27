@@ -24,8 +24,8 @@ importers:
         specifier: ^7.0.2
         version: 7.0.2
       pyright:
-        specifier: ^1.1.399
-        version: 1.1.399
+        specifier: ^1.1.400
+        version: 1.1.400
 
 packages:
 
@@ -208,8 +208,8 @@ packages:
     resolution: {integrity: sha512-7Bv8RF0k6xjo7d4A/PxYLbUCfb6c+Vpd2/mB2yRDlew7Jb5hEXiCD9ibfO7wpk8i4sevK6DFny9h7EYbM3/sHg==}
     hasBin: true
 
-  ignore@7.0.3:
-    resolution: {integrity: sha512-bAH5jbK/F3T3Jls4I0SO1hmPR0dKU0a7+SY6n1yzRtG54FLO8d6w/nxLFX2Nb7dBu6cCWXPaAME6cYqFUMmuCA==}
+  ignore@7.0.4:
+    resolution: {integrity: sha512-gJzzk+PQNznz8ysRrC0aOkBNVRBDtE1n53IqyqEf3PXrYwomFs5q4pGMizBMJF+ykh03insJ27hB8gSrD2Hn8A==}
     engines: {node: '>= 4'}
 
   ini@4.1.3:
@@ -408,8 +408,8 @@ packages:
     resolution: {integrity: sha512-uxFIHU0YlHYhDQtV4R9J6a52SLx28BCjT+4ieh7IGbgwVJWO+km431c4yRlREUAsAmt/uMjQUyQHNEPf0M39CA==}
     engines: {node: '>=6'}
 
-  pyright@1.1.399:
-    resolution: {integrity: sha512-roYApcOUEraOc2gTZX052/cw/AZ5rQGkdG/2DtU1/KyhfP+C5zHDlvOT24qRgPXDDkh76AvFwq5quZ1SMahq7w==}
+  pyright@1.1.400:
+    resolution: {integrity: sha512-e0NFMPWhMvPn4siTAN6MsWZ6S/ePydUp1BOXbkh+8I+H+/KulnBb+2ceHNkI32nxZWalQxfUMNoGCHdGMXsmUA==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -437,8 +437,8 @@ packages:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
 
-  smol-toml@1.3.3:
-    resolution: {integrity: sha512-KMVLNWu490KlNfD0lbfDBUktJIEaZRBj1eeK0SMfdpO/rfyARIzlnPVI1Ge4l0vtSJmQUAiGKxMyLGrCT38iyA==}
+  smol-toml@1.3.4:
+    resolution: {integrity: sha512-UOPtVuYkzYGee0Bd2Szz8d2G3RfMfJ2t3qVdZUAozZyAk+a0Sxa+QKix0YCwjL/A1RR0ar44nCxaoN9FxdJGwA==}
     engines: {node: '>= 18'}
 
   string-width@4.2.3:
@@ -624,7 +624,7 @@ snapshots:
       package-json-from-dist: 1.0.1
       path-scurry: 1.11.1
 
-  ignore@7.0.3: {}
+  ignore@7.0.4: {}
 
   ini@4.1.3: {}
 
@@ -684,14 +684,14 @@ snapshots:
     dependencies:
       commander: 13.1.0
       glob: 10.4.5
-      ignore: 7.0.3
+      ignore: 7.0.4
       js-yaml: 4.1.0
       jsonc-parser: 3.3.1
       jsonpointer: 5.0.1
       markdownlint: 0.37.4
       minimatch: 9.0.5
       run-con: 1.3.2
-      smol-toml: 1.3.3
+      smol-toml: 1.3.4
     transitivePeerDependencies:
       - supports-color
 
@@ -931,7 +931,7 @@ snapshots:
 
   punycode.js@2.3.1: {}
 
-  pyright@1.1.399:
+  pyright@1.1.400:
     optionalDependencies:
       fsevents: 2.3.3
 
@@ -957,7 +957,7 @@ snapshots:
 
   signal-exit@4.1.0: {}
 
-  smol-toml@1.3.3: {}
+  smol-toml@1.3.4: {}
 
   string-width@4.2.3:
     dependencies:
