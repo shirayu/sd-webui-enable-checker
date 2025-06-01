@@ -5,9 +5,9 @@
     "@biomejs/biome": "1.9.4",
     "@taplo/cli": "^0.7.0",
     "markdown-it": "^14.1.0",
-    "markdownlint-cli": "^0.44.0",
-    "npm-run-all2": "^8.0.1",
-    "pyright": "^1.1.400"
+    "markdownlint-cli": "^0.45.0",
+    "npm-run-all2": "^8.0.4",
+    "pyright": "^1.1.401"
   },
   "engines": {
     "npm": "Use pnpm instead of npm!"
