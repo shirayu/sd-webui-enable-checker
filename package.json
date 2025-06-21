@@ -2,7 +2,7 @@
   "author": "",
   "description": "",
   "devDependencies": {
-    "@biomejs/biome": "2.0.0",
+    "@biomejs/biome": "2.0.4",
     "@taplo/cli": "^0.7.0",
     "markdown-it": "^14.1.0",
     "markdownlint-cli": "^0.45.0",
