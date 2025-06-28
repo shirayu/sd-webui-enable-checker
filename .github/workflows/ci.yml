@@ -20,6 +20,12 @@ jobs:
         with:
           node-version: '22'
 
+      - name: "Set up Python"
+        id: setup-python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: "pyproject.toml"
+
       - name: Install the latest version of uv
         uses: astral-sh/setup-uv@v6
         with:
@@ -29,7 +35,7 @@ jobs:
         name: Setup uv cache
         with:
           path: .venv
-          key: ${{ runner.os }}-uv-store-${{ hashFiles('**/uv.lock') }}
+          key: ${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-uv-store-${{ hashFiles('**/uv.lock') }}
           restore-keys: |
             ${{ runner.os }}-uv-store-
 
