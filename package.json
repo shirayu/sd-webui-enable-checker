@@ -2,12 +2,12 @@
   "author": "",
   "description": "",
   "devDependencies": {
-    "@biomejs/biome": "2.1.4",
+    "@biomejs/biome": "2.2.2",
     "@taplo/cli": "^0.7.0",
     "markdown-it": "^14.1.0",
     "markdownlint-cli": "^0.45.0",
     "npm-run-all2": "^8.0.4",
-    "pyright": "^1.1.403"
+    "pyright": "^1.1.404"
   },
   "engines": {
     "npm": "Use pnpm instead of npm!"
